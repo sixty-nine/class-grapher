@@ -9,13 +9,13 @@ the PHP files found in the path given as parameter.
 Installation
 ------------
 
-1. Download composer
+#### Download composer
 
-see http://packagist.org/
+See http://packagist.org/
 
 You have to put the composer.phar file in the root directory of the project.
 
-2. Install the vendors
+#### Install the vendors
 
 ```
 ./composer.phar install
