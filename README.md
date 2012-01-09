@@ -9,7 +9,13 @@ the PHP files found in the path given as parameter.
 Installation
 ------------
 
-Before using the grapher you need to install the vendors libraries:
+1. Download composer
+
+see http://packagist.org/
+
+You have to put the composer.phar file in the root directory of the project.
+
+2. Install the vendors
 
 ```
 ./composer.phar install
