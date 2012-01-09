@@ -56,24 +56,25 @@ class Parser
     {
         while (!$this->tokenizer->isEof()) {
 
-            $token = $this->tokenizer->peekToken();
+            if ($token = $this->tokenizer->peekToken()) {
 
-            switch ($token->type) {
-                case T_USE:
-                    $this->parseUse();
-                    break;
-                case T_NAMESPACE:
-                    $this->parseNamespace();
-                    break;
-                case T_CLASS:
-                    $this->parseClass();
-                    break;
-                case T_INTERFACE:
-                    $this->parseInterface();
-                    break;
-                default:
-                    // Consume the token
-                    $this->tokenizer->getToken();
+                switch ($token->type) {
+                    case T_USE:
+                        $this->parseUse();
+                        break;
+                    case T_NAMESPACE:
+                        $this->parseNamespace();
+                        break;
+                    case T_CLASS:
+                        $this->parseClass();
+                        break;
+                    case T_INTERFACE:
+                        $this->parseInterface();
+                        break;
+                    default:
+                        // Consume the token
+                        $this->tokenizer->getToken();
+                }
             }
         }
     }
@@ -89,13 +90,10 @@ class Parser
         while (true) {
 
             $alias = '';
-            $this->consumeSpaces();
             $fqn = $this->parseIdentifier();
-            $this->consumeSpaces();
 
             if ($this->tokenizer->peekToken()->type === T_AS) {
                 $this->tokenizer->expectToken(T_AS, false, true);
-                $this->consumeSpaces();
                 $alias = $this->parseIdentifier();
             }
 
@@ -117,7 +115,6 @@ class Parser
     protected function parseNamespace()
     {
         $this->tokenizer->getToken();
-        $this->consumeSpaces();
         $this->curNamespace = $this->parseIdentifier();
         $this->classResolver->setNamespace($this->curNamespace);
     }
@@ -132,30 +129,23 @@ class Parser
         $implements = array();
         
         $this->tokenizer->getToken();
-        $this->consumeSpaces();
         $name = $this->parseIdentifier();
-        $this->consumeSpaces();
 
         if ($this->tokenizer->peekToken()->type === T_EXTENDS) {
 
             $this->tokenizer->expectToken(T_EXTENDS, false, true);
-            $this->consumeSpaces();
             $extends = $this->parseIdentifier();
         }
-
-        $this->consumeSpaces();
 
         if ($this->tokenizer->peekToken()->type === T_IMPLEMENTS) {
 
             $this->tokenizer->expectToken(T_IMPLEMENTS, false, true);
-            $this->consumeSpaces();
 
             while (true) {
                 $implements[] = $this->parseIdentifier();
 
                 if ($this->tokenizer->peekToken()->data === ',') {
                     $this->tokenizer->getToken();
-                    $this->consumeSpaces();
                 } else {
                     break;
                 }
@@ -172,8 +162,6 @@ class Parser
     protected function parseInterface()
     {
         $this->tokenizer->expectToken(T_INTERFACE, false, true);
-        $this->consumeSpaces();
-
         $this->objectTable->add(new InterfaceItem($this->classResolver->resolve($this->parseIdentifier())));
     }
 
@@ -192,17 +180,6 @@ class Parser
         }
 
         return $buffer;
-    }
-
-    /**
-     * Consume the spaces from the tokenizer
-     * @return void
-     */
-    protected function consumeSpaces()
-    {
-        while ($this->tokenizer->peekToken()->type === T_WHITESPACE) {
-            $this->tokenizer->getToken();
-        }
     }
 
     /**

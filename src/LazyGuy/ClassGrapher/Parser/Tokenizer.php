@@ -35,9 +35,21 @@ class Tokenizer
             return false;
         }
 
-        $token = $this->tokens[$this->curToken];
+        while (true) {
 
-        return $this->convertToken($token);
+            if ($this->isEof()) {
+                break;
+            }
+
+            $token = $this->tokens[$this->curToken];
+            if ($token[0] !== T_WHITESPACE) {
+                return $this->convertToken($token);
+            }
+
+            $this->forward();
+        }
+
+        return false;
     }
 
     public function getToken()
@@ -55,7 +67,7 @@ class Tokenizer
 
             $testData = $compareType ? $token->type : $token->data;
             if ($testData !== $data) {
-                throw new TokenizerException("Expected '$data' got '{$token->data}'");
+                throw new TokenizerException("Expected '$data' got '$testData'");
             }
 
         } else {
