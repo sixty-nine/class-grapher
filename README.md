@@ -30,5 +30,5 @@ Assumed you have GraphViz installed you can run the following command to generat
 a class diagram of the class grapher:
 
 ```
-grapher lazyguy:graph src/ | dot -T png | display
+php grapher.php lazyguy:graph src/ | dot -T png | display
 ```
