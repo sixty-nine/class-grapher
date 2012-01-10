@@ -11,7 +11,7 @@ class GraphVizBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $expected = <<<EOF
 digraph G {
-
+SOME_BOILER_PLATE_CODE
 node_0 [ label = "MyInterface1" ]
 node_1 [ label = "MyInterface2" ]
 node_2 [ label = "MyClass1" ]
@@ -36,7 +36,7 @@ EOF;
         $builder = new GraphVizBuilder();
         $graph = $builder->build($table);
 
-        $res = $graph->render();
+        $res = $graph->render('SOME_BOILER_PLATE_CODE');
         $this->assertEquals($expected, $res);
     }
 }
