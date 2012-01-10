@@ -9,34 +9,34 @@ class GraphVizBuilderTest extends \PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
-        $boilerplate = <<<EOF
-fontname = "Bitstream Vera Sans"
-fontsize = 8
-layout = dot
-concentrate=true
+        $expected = <<<EOF
+digraph G {
 
-node [
-    fontname = "Bitstream Vera Sans"
-    fontsize = 8
-    shape = "box"
-]
+node_0 [ label = "MyInterface1" ]
+node_1 [ label = "MyInterface2" ]
+node_2 [ label = "MyClass1" ]
+node_3 [ label = "GraphViz" ]
+node_4 [ label = "MyClass2" ]
+node_5 [ label = "MyClass3" ]
+node_6 [ label = "MyClass4" ]
+node_3 -> node_2
+node_0 -> node_4
+node_3 -> node_5
+node_0 -> node_5
+node_0 -> node_6
+node_1 -> node_6
 
-edge [
-    dir = "back"
-    fontname = "Bitstream Vera Sans"
-    fontsize = 8
-    arrowtail = "empty"
-]
+}
 
 EOF;
 
         $otBuilder = new ObjectTableBuilder();
-        $table = $otBuilder->build(__DIR__ . '/../');
+        $table = $otBuilder->build(__DIR__ . '/../Fixtures');
 
         $builder = new GraphVizBuilder();
         $graph = $builder->build($table);
 
-        $res = $graph->render($boilerplate);
-        //echo $res;
+        $res = $graph->render();
+        $this->assertEquals($expected, $res);
     }
 }
