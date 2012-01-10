@@ -12,7 +12,7 @@ files, even if there are missing dependencies.
 
 The grapher supports namespaced PHP 5.3. However, to reduce the width of the rendered 
 graph, the full namespaces are not shown in the diagram. This can easily be changed in
-GraphVizBuilder::addNode method.
+the GraphVizBuilder::addNode method.
 
 Installation
 ------------
