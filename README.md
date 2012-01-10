@@ -6,7 +6,10 @@ This code is distributed under the MIT license.
 This application will generate a basic class diagram in GraphViz DOT format from
 the PHP files found in the path given as parameter.
 
-This code does not use PHP reflection so that there is no need to actually instanciate
+The goal of the project is not to get an exact and detailed UML view, but rather
+to provide the programmer with a quick way to figure out how some code is structured.
+
+The grapher does not use PHP reflection so that there is no need to actually instanciate
 the classes that will be shown in the diagram. It means you can graph any set of PHP
 files, even if there are missing dependencies.
 
