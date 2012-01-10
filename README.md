@@ -1,4 +1,4 @@
-Class Grapher
+Class Grapher [![Build Status](https://secure.travis-ci.org/sixty-nine/ClassGrapher.png)](http://travis-ci.org/sixty-nine/ClassGrapher)
 =============
 
 This code is distributed under the MIT license.
