@@ -3,5 +3,8 @@ php:
   - 5.3
   - 5.4
 
+before_script:
+  - ./travis.sh
+
 script: phpunit -c src/LazyGuy/ClassGrapher/Tests/
 
