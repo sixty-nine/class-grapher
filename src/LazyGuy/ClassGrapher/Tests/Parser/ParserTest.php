@@ -16,11 +16,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $ns = 'LazyGuy\\ClassGrapher\\Tests\\Fixtures\\';
         $expected = array(
             new InterfaceItem($ns . 'MyInterface1'),
-            new InterfaceItem($ns . 'MyInterface2', $ns . 'MyInterface1'),
-            new ClassItem($ns . 'MyClass1', 'LazyGuy\ClassGrapher\Graph\GraphViz'),
-            new ClassItem($ns . 'MyClass2', '', array($ns . 'MyInterface1')),
-            new ClassItem($ns . 'MyClass3', 'LazyGuy\ClassGrapher\Graph\GraphViz', array($ns . 'MyInterface1')),
-            new ClassItem($ns . 'MyClass4', '', array($ns . 'MyInterface1', $ns . 'MyInterface2')),
+            new InterfaceItem($ns . 'MyInterface2', array($ns . 'MyInterface1')),
+            new InterfaceItem($ns . 'MyInterface3', array($ns . 'MyInterface1', $ns . 'MyInterface2')),
+            new ClassItem($ns . 'MyClass1', array('LazyGuy\ClassGrapher\Graph\GraphViz')),
+            new ClassItem($ns . 'MyClass2', array(), array($ns . 'MyInterface1')),
+            new ClassItem($ns . 'MyClass3', array('LazyGuy\ClassGrapher\Graph\GraphViz'), array($ns . 'MyInterface1')),
+            new ClassItem($ns . 'MyClass4', array(), array($ns . 'MyInterface1', $ns . 'MyInterface2')),
         );
 
         $ot = new ObjectTable();
@@ -31,12 +32,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
         $it = $ot->getIterator();
 
-        $this->assertEquals(6, $it->count());
+        $this->assertEquals(7, $it->count());
         $this->assertEquals($expected[0], $it->current()); $it->next();
         $this->assertEquals($expected[1], $it->current()); $it->next();
         $this->assertEquals($expected[2], $it->current()); $it->next();
         $this->assertEquals($expected[3], $it->current()); $it->next();
         $this->assertEquals($expected[4], $it->current()); $it->next();
         $this->assertEquals($expected[5], $it->current()); $it->next();
+        $this->assertEquals($expected[6], $it->current()); $it->next();
     }
 }

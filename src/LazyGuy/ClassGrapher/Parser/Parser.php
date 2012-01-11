@@ -125,7 +125,7 @@ class Parser
      */
     protected function parseClass()
     {
-        $extends = '';
+        $extends = array();
         $implements = array();
         
         $this->tokenizer->getToken();
@@ -134,7 +134,7 @@ class Parser
         if ($this->tokenizer->peekToken()->type === T_EXTENDS) {
 
             $this->tokenizer->expectToken(T_EXTENDS, false, true);
-            $extends = $this->parseIdentifier();
+            $extends = array($this->parseIdentifier());
         }
 
         if ($this->tokenizer->peekToken()->type === T_IMPLEMENTS) {
@@ -161,13 +161,25 @@ class Parser
      */
     protected function parseInterface()
     {
-        $extends = '';
+        $extends = array();
         $this->tokenizer->expectToken(T_INTERFACE, false, true);
         $name = $this->classResolver->resolve($this->parseIdentifier());
 
         if ($this->tokenizer->peekToken()->type === T_EXTENDS) {
+
             $this->tokenizer->expectToken(T_EXTENDS, false, true);
-            $extends = $this->classResolver->resolve($this->parseIdentifier());
+
+            while (true) {
+
+                $extends[] = $this->classResolver->resolve($this->parseIdentifier());
+
+                if ($this->tokenizer->peekToken()->data === ',') {
+                    $this->tokenizer->getToken();
+                } else {
+                    break;
+                }
+            }
+
         }
 
         $this->objectTable->add(new InterfaceItem($name, $extends));
@@ -201,15 +213,16 @@ class Parser
     {
         $name = $this->curNamespace . '\\' . $name;
 
-        if ($extends) {
-            $extends = $this->classResolver->resolve($extends);
+        $resolvedExtends = array();
+        foreach($extends as $extend) {
+            $resolvedExtends[] = $this->classResolver->resolve($extend);
         }
-        
+
         $resolvedImplements = array();
         foreach($implements as $interface) {
             $resolvedImplements[] = $this->classResolver->resolve($interface);
         }
 
-        $this->objectTable->add(new ClassItem($name, $extends, $resolvedImplements));
+        $this->objectTable->add(new ClassItem($name, $resolvedExtends, $resolvedImplements));
     }
 }

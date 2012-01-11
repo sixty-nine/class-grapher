@@ -62,8 +62,7 @@ class GraphVizBuilder
             }
 
             // Generate parent node and edge
-            $parentName = $item->getExtends();
-            if ($parentName) {
+            foreach($item->getExtends() as $parentName) {
                 $parentHash = md5($parentName);
                 $this->addNode($parentName);
                 $this->graph->addEdge($this->nodes[$parentHash], $this->nodes[$nodeHash]);
