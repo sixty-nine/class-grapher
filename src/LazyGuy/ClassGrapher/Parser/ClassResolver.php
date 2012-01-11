@@ -30,7 +30,7 @@ class ClassResolver
 
     /**
      * Add a PHP use to the class resolver. If alias is empty then the last part of the fqn is used as alias.
-     * @param $fqn Full qualified name of the used item
+     * @param string $fqn Full qualified name of the used item
      * @param string $alias The alias to associate the use to. If empty, the last part of $fqn is used
      * @return void
      */
@@ -47,7 +47,7 @@ class ClassResolver
 
     /**
      * Set the current namespace that will be used to resolve classes without namespace
-     * @param $namespace The current namespace
+     * @param string $namespace The current namespace
      * @return void
      */
     public function setNamespace($namespace)
@@ -58,7 +58,7 @@ class ClassResolver
     /**
      * Resolve a class name to a fully qualified class name in regards to the current namespace
      * and the actual use statements
-     * @param $name The class name to resolve
+     * @param string $name The class name to resolve
      * @return string The fully qualified class name
      */
     public function resolve($name)
