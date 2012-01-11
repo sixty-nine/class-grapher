@@ -16,7 +16,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $ns = 'LazyGuy\\ClassGrapher\\Tests\\Fixtures\\';
         $expected = array(
             new InterfaceItem($ns . 'MyInterface1'),
-            new InterfaceItem($ns . 'MyInterface2'),
+            new InterfaceItem($ns . 'MyInterface2', $ns . 'MyInterface1'),
             new ClassItem($ns . 'MyClass1', 'LazyGuy\ClassGrapher\Graph\GraphViz'),
             new ClassItem($ns . 'MyClass2', '', array($ns . 'MyInterface1')),
             new ClassItem($ns . 'MyClass3', 'LazyGuy\ClassGrapher\Graph\GraphViz', array($ns . 'MyInterface1')),

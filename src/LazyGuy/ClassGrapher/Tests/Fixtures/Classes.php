@@ -9,7 +9,7 @@ interface MyInterface1
 
 }
 
-interface MyInterface2
+interface MyInterface2 extends MyInterface1
 {
 
 }

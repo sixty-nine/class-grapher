@@ -44,18 +44,11 @@ class GraphVizBuilder
 
         foreach($table as $item)
         {
+            $nodeHash = md5($item->getName());
+
             if ($item instanceof ClassItem) {
 
                 $this->addNode($item->getName());
-                $nodeHash = md5($item->getName());
-
-                // Generate parent node and edge
-                $parentName = $item->getExtends();
-                if ($parentName) {
-                    $parentHash = md5($parentName);
-                    $this->addNode($parentName);
-                    $this->graph->addEdge($this->nodes[$parentHash], $this->nodes[$nodeHash]);
-                }
 
                 // Generate interfaces nodes and edges
                 foreach ($item->getImplements() as $interfaceName) {
@@ -67,6 +60,15 @@ class GraphVizBuilder
 
                 $this->addNode($item->getName(), true);
             }
+
+            // Generate parent node and edge
+            $parentName = $item->getExtends();
+            if ($parentName) {
+                $parentHash = md5($parentName);
+                $this->addNode($parentName);
+                $this->graph->addEdge($this->nodes[$parentHash], $this->nodes[$nodeHash]);
+            }
+
         }
 
         return $this->graph;

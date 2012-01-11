@@ -161,8 +161,16 @@ class Parser
      */
     protected function parseInterface()
     {
+        $extends = '';
         $this->tokenizer->expectToken(T_INTERFACE, false, true);
-        $this->objectTable->add(new InterfaceItem($this->classResolver->resolve($this->parseIdentifier())));
+        $name = $this->classResolver->resolve($this->parseIdentifier());
+
+        if ($this->tokenizer->peekToken()->type === T_EXTENDS) {
+            $this->tokenizer->expectToken(T_EXTENDS, false, true);
+            $extends = $this->classResolver->resolve($this->parseIdentifier());
+        }
+
+        $this->objectTable->add(new InterfaceItem($name, $extends));
     }
 
     /**

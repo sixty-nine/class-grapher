@@ -6,9 +6,12 @@ class InterfaceItem implements ItemInterface
 {
     protected $name;
 
-    public function __construct($name = '')
+    protected $extends;
+
+    public function __construct($name = '', $extends = '')
     {
         $this->name = $name;
+        $this->extends = $extends;
     }
 
     public function setName($name)
@@ -19,5 +22,15 @@ class InterfaceItem implements ItemInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    public function setExtends($extends)
+    {
+        $this->extends = $extends;
+    }
+
+    public function getExtends()
+    {
+        return $this->extends;
     }
 }
