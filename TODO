@@ -1,0 +1,7 @@
+TODO List
+---------
+
+- Interfaces can extend more than one interface
+    --> InterfaceItem::$extends must be an array as $implements
+
+- Different style to draw interfaces
