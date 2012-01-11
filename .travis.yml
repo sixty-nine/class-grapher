@@ -4,7 +4,9 @@ php:
   - 5.4
 
 before_script:
-  - ./travis.sh
+  - wget http://getcomposer.org/composer.phar
+  - chmod +x composer.phar
+  - ./composer.phar install
 
 script: phpunit -c src/LazyGuy/ClassGrapher/Tests/
 
