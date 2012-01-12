@@ -20,6 +20,8 @@ the GraphVizBuilder::addNode method.
 Installation
 ------------
 
+This code uses external components that will be installed with composer.
+
 #### Download composer
 
 See http://packagist.org/
@@ -27,7 +29,7 @@ See http://packagist.org/
 You have to put the composer.phar file in the root directory of the project.
 
 ```
-cd project_dir
+cd project_dir # The folder where you have put the ClassGrapher files
 wget http://getcomposer.org/composer.phar
 chmod +x composer.phar
 ```
@@ -41,7 +43,7 @@ chmod +x composer.phar
 Usage
 -----
 
-Assumed you have GraphViz installed you can run the following command to generate
+Assumed you have ImageMagick installed you can run the following command to generate
 a class diagram of the class grapher code:
 
 ```
