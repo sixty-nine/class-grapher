@@ -4,6 +4,8 @@ namespace LazyGuy\ClassGrapher\Model;
 
 interface ItemInterface {
 
-    public function getName();
-    public function setName($name);
+    function getName();
+    function setName($name);
+    function addMethod($methodName);
+    function getMethods();
 }

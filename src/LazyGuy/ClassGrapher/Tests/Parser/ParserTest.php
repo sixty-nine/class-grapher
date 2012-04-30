@@ -41,4 +41,23 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected[5], $it->current()); $it->next();
         $this->assertEquals($expected[6], $it->current()); $it->next();
     }
+
+    public function testParseFunctions()
+    {
+        $ns = 'LazyGuy\\ClassGrapher\\Tests\\Fixtures\\';
+
+        $ot = new ObjectTable();
+        $resolver = new ClassResolver();
+        $tokenizer = new Tokenizer(__DIR__ . '/../Fixtures/Methods.php');
+        $parser = new Parser($tokenizer, $resolver, $ot);
+        $parser->parse();
+
+        $it = $ot->getIterator();
+
+        $this->assertEquals(1, $it->count());
+        $this->assertEquals(
+            array("myPublicFunction", "myPublicFunctionWithParams", "myProtectedFunction", "myPrivateFunction"),
+            $it->current()->getMethods()
+        );
+    }
 }

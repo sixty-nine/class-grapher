@@ -2,6 +2,8 @@
 
 namespace LazyGuy\ClassGrapher\Parser;
 
+use LazyGuy\ClassGrapher\Helper\NamespaceHelper;
+
 /**
  * Resolve class names to fully qualified class names
  *
@@ -37,7 +39,7 @@ class ClassResolver
     public function addUse($fqn, $alias = '')
     {
         if ($alias === '') {
-            $alias = basename(str_replace('\\', '/', $fqn));
+            $alias = NamespaceHelper::getBasename($fqn);
         }
 
         if (!array_key_exists($alias, $this->use)) {

@@ -16,7 +16,7 @@ class Tokenizer
     public function __construct($fileName)
     {
         if (!file_exists($fileName)) {
-            throw new InvalidArgumentException("File not found '$fileName'");
+            throw new \InvalidArgumentException("File not found '$fileName'");
         }
 
         $this->curToken = 0;
@@ -65,7 +65,12 @@ class Tokenizer
 
             $token = $this->getToken();
 
-            $testData = $compareType ? $token->type : $token->data;
+            if (!$token) {
+                throw new TokenizerException("Not token found");
+            }
+
+            $testData = $compareType ? $token->type : trim($token->data);
+
             if ($testData !== $data) {
                 throw new TokenizerException("Expected '$data' got '$testData'");
             }
@@ -74,7 +79,7 @@ class Tokenizer
 
             $token = $this->peekToken();
 
-            $testData = $compareType ? $token->type : $token->data;
+            $testData = $compareType ? $token->type : trim($token->data);
             if ($testData !== $data) {
                 return false;
             }
@@ -90,6 +95,11 @@ class Tokenizer
         if (!$this->isEof()) {
             $this->curToken += 1;
         }
+    }
+
+    public function reset()
+    {
+        $this->curToken = 0;
     }
 
     protected function convertToken($phpToken)

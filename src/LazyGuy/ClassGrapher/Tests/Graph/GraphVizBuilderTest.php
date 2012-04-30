@@ -20,6 +20,7 @@ node_4 [ label = "GraphViz" ]
 node_5 [ label = "MyClass2" ]
 node_6 [ label = "MyClass3" ]
 node_7 [ label = "MyClass4" ]
+node_8 [ label = "MyClass5" ]
 node_0 -> node_1
 node_0 -> node_2
 node_1 -> node_2

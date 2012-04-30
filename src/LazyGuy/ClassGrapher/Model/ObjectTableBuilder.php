@@ -19,8 +19,14 @@ class ObjectTableBuilder
         $objectTable = new ObjectTable();
         $classResolver = new ClassResolver();
 
-        $finder = new FileFinder();
-        $files = $finder->find(realpath($dirName), '*.php', $ignore);
+        if (is_dir($dirName)) {
+            $finder = new FileFinder();
+            $files = $finder->find(realpath($dirName), '*.php', $ignore);
+        } elseif (file_exists($dirName)) {
+            $files = array($dirName);
+        } else {
+            throw new \InvalidArgumentException("File or directory not found '$dirName'");
+        }
 
         foreach ($files as $file) {
             $parser = new Parser(new Tokenizer($file), $classResolver, $objectTable);

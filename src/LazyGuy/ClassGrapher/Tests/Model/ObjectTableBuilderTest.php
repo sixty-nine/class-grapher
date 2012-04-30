@@ -14,7 +14,7 @@ class ObjectTableBuilderTest extends \PHPUnit_Framework_TestCase
         $table = $builder->build(__DIR__ . '/../Fixtures');
         $array = iterator_to_array($table);
 
-        $this->assertEquals(7, count($array));
+        $this->assertEquals(8, count($array));
 
         $this->assertTrue(array_key_exists($ns . 'MyInterface1', $array));
         $this->assertTrue(array_key_exists($ns . 'MyInterface2', $array));

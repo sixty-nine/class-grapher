@@ -5,7 +5,8 @@ namespace LazyGuy\ClassGrapher\Graph;
 use LazyGuy\ClassGrapher\Model\ObjectTable,
     LazyGuy\ClassGrapher\Model\ItemInterface,
     LazyGuy\ClassGrapher\Model\ClassItem,
-    LazyGuy\ClassGrapher\Model\InterfaceItem;
+    LazyGuy\ClassGrapher\Model\InterfaceItem,
+    LazyGuy\ClassGrapher\Helper\NamespaceHelper;
 
 /**
  * Build a simple GraphViz inheritance graph from an object table
@@ -87,7 +88,7 @@ class GraphVizBuilder
 
             $id = 'node_' . $this->counter;
             $this->nodes[$hash] = $id;
-            $label = basename(str_replace('\\', '/', $name));
+            $label = NamespaceHelper::getBasename($name);
 
             // TODO: implement a different node style when $interface is true
 

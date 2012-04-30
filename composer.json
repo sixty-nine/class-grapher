@@ -1,11 +1,17 @@
 {
     "require": {
-    	"symfony/console": "2.0.7"
+    	"symfony/console": "2.0.7",
+        "symfony/filesystem": "2.1.0-dev",
+        "twig/twig": "1.5.1",
+	"phpcr/phpcr": "dev-master",
+    "jackalope/jackalope-jackrabbit": "dev-master",
+	"jackalope/jackalope": "dev-master"
     },
 
     "autoload": {
         "psr-0": {
-            "LazyGuy\\ClassGrapher": "src"
+            "LazyGuy\\ClassGrapher": "src",
+            "LazyGuy\\Parser": "src"
         }
     }
 

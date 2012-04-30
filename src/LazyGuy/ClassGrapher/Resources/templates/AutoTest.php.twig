@@ -1,0 +1,19 @@
+<?php
+
+namespace {{namespace}};
+
+use {{fullClassName}};
+
+class {{className}}Test extends \PHPUnit_Framework_TestCase
+{
+{% for method in methods %}
+    /**
+     * Test for {{method}}
+     */
+    public function test{{method}}()
+    {
+        // TODO: Add your code here
+    }
+
+{% endfor %}
+}

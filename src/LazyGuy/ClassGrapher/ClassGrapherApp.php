@@ -12,6 +12,7 @@ class ClassGrapherApp extends Application
 
         $commands = array(
             new Command\BuildGraphCommand(),
+            new Command\AutoTestCommand(),
         );
 
         $this->addCommands($commands);

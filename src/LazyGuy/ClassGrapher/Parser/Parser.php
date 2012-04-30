@@ -35,6 +35,11 @@ class Parser
     protected $tokenizer;
 
     /**
+     * @var \LazyGuy\ClassGrapher\Model\ItemInterface
+     */
+    protected $currentItem;
+
+    /**
      * Constructor
      * @param Tokenizer $tokenizer
      * @param ClassResolver $classResolver
@@ -58,6 +63,8 @@ class Parser
 
             if ($token = $this->tokenizer->peekToken()) {
 
+                //var_dump(sprintf('%s[%s]', token_name($token->type), $token->data));
+
                 switch ($token->type) {
                     case T_USE:
                         $this->parseUse();
@@ -70,6 +77,9 @@ class Parser
                         break;
                     case T_INTERFACE:
                         $this->parseInterface();
+                        break;
+                    case T_FUNCTION:
+                        $this->parseFunction();
                         break;
                     default:
                         // Consume the token
@@ -185,6 +195,15 @@ class Parser
         $this->objectTable->add(new InterfaceItem($name, $extends));
     }
 
+    protected function parseFunction()
+    {
+        $this->tokenizer->expectToken(T_FUNCTION, false, true);
+        $name = $this->parseIdentifier();
+        if ($this->currentItem) {
+            $this->currentItem->addMethod($name);
+        }
+    }
+
     /**
      * Parse a PHP fully qualified class name in the form: ns1\ns2\...\nsn\class
      * @return string The FQN or empty if none was found
@@ -223,6 +242,8 @@ class Parser
             $resolvedImplements[] = $this->classResolver->resolve($interface);
         }
 
-        $this->objectTable->add(new ClassItem($name, $resolvedExtends, $resolvedImplements));
+        $item = new ClassItem($name, $resolvedExtends, $resolvedImplements);
+        $this->currentItem = $item;
+        $this->objectTable->add($item);
     }
 }
