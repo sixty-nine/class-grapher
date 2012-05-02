@@ -17,7 +17,7 @@ class NodeTypeGenerator
     {
         $visitor = new CndSyntaxTreeNodeVisitor($this);
         $this->root->accept($visitor);
-        var_dump($visitor->getNodeTypeDefs());
+        return $visitor->getNodeTypeDefs();
     }
 
 }
