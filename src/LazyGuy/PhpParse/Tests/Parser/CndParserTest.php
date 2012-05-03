@@ -32,7 +32,7 @@ class CndParserTest extends \PHPUnit_Framework_TestCase
         $prop = new SyntaxTreeNode('propertyDef');
         $prop->addChild(new SyntaxTreeNode('propertyName', array('value' => 'ex:property')));
         $prop->addChild(new SyntaxTreeNode('propertyType', array('value' => 'STRING')));
-        $prop->addChild(new SyntaxTreeNode('defaultValue', array('value' => array('default1', 'default2'))));
+        $prop->addChild(new SyntaxTreeNode('defaultValues', array('value' => array('default1', 'default2'))));
         $prop->addChild($attrs);
         $prop->addChild(new SyntaxTreeNode('valueConstraints', array('value' => array('constraint1', 'constraint2'))));
         $props->addChild($prop);
@@ -96,6 +96,19 @@ class CndParserTest extends \PHPUnit_Framework_TestCase
         // TODO: write some tests with this file
     }
 
+    /**
+     * Test the case where the parser did not parse correctly
+     * the default values at the end of the parsed file.
+     *
+     * Assert no exception is thrown
+     *
+     * @return void
+     */
+    public function testNoStopAtEofError()
+    {
+        $this->parseFile(__DIR__ . '/../Fixtures/cnd/no-stop-at-eof.cnd');
+    }
+
     protected function assertParsedFile($file, $expectedCnd)
     {
         $actualCnd = $this->parseFile($file);
@@ -108,7 +121,6 @@ class CndParserTest extends \PHPUnit_Framework_TestCase
     protected function parseFile($file)
     {
         $reader = new FileReader($file);
-
         $scanner = new GenericScanner(new Context\DefaultScannerContextWithoutSpacesAndComments());
         $queue = $scanner->scan($reader);
 

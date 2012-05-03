@@ -283,11 +283,11 @@ class CndParser extends AbstractParser
         if ($attrNode = $this->parsePropertyAttributes()) {
             $node->addChild($attrNode);
         }
-
         // Check if there is a constraint (and not another namespace def)
+        // Next token is '<' and two token later it's not '=', i.e. not '<ident='
         $next1 = $this->tokenQueue->peek();
         $next2 = $this->tokenQueue->peek(2);
-        if ($next1 && $next2 && $next1->getData() === '<' && $next2->getData() !== '=') {
+        if ($next1 && $next1->getData() === '<' && (!$next2 || $next2->getData() !== '=')) {
             $node->addChild($this->parseValueConstraints());
         }
 
@@ -343,18 +343,20 @@ class CndParser extends AbstractParser
      */
     protected function parseDefaultValue()
     {
-        $this->debug('parseDefaultValue');
+        $this->debug('parseDefaultValues');
 
         // TODO: parse ?
         $this->expectToken(Token::TK_SYMBOL, '=');
 
         if ($this->checkAndExpectToken(Token::TK_SYMBOL, '?')) {
-            $list = '?';
+            $list = array('?');
         } else {
             $list = $this->parseCndStringList();
         }
-        
-        return new SyntaxTreeNode('defaultValue', array('value' => $list));
+
+        $this->debugRes(sprintf('defaultValues: (%s)', join(', ', $list)));
+
+        return new SyntaxTreeNode('defaultValues', array('value' => $list));
     }
 
     /**
@@ -373,7 +375,7 @@ class CndParser extends AbstractParser
         $this->expectToken(Token::TK_SYMBOL, '<');
 
         if ($this->checkAndExpectToken(Token::TK_SYMBOL, '?')) {
-            $list = '?';
+            $list = array('?');
         } else {
             $list = $this->parseCndStringList();
         }

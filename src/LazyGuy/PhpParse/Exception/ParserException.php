@@ -19,7 +19,7 @@ class ParserException extends \Exception
                 break;
             }
             $token = $queue->get();
-            $lookup .= $token->getData();
+            $lookup .= $token->getData() . ' ';
         }
         $msg .= "\nBuffer lookup: \"$lookup\"";
 

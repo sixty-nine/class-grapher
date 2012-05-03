@@ -35,6 +35,12 @@ class TokenQueue implements \IteratorAggregate
             return current($this->tokens);
         }
 
+        $lookup = key($this->tokens) + $offset;
+
+        if ($lookup >= count($this->tokens)) {
+            return false;
+        }
+
         return $this->tokens[key($this->tokens) + $offset];
     }
 

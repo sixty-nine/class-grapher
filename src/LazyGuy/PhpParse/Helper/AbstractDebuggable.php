@@ -16,9 +16,11 @@ abstract class AbstractDebuggable
      */
     protected function debug($msg, $indent = 0)
     {
+        //@codeCoverageIgnoreStart
         if (defined('DEBUG') && DEBUG) {
             echo sprintf("%s%s\n", str_repeat('  ', $indent), $msg);
         }
+        //@codeCoverageIgnoreEnd
     }
 
     /**
