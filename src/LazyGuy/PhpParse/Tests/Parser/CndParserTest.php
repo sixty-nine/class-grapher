@@ -109,6 +109,11 @@ class CndParserTest extends \PHPUnit_Framework_TestCase
         $this->parseFile(__DIR__ . '/../Fixtures/cnd/no-stop-at-eof.cnd');
     }
 
+    // TODO: test variant required type for child node def
+    // TODO: test parseCndString without a string throws a parser error
+    // TODO: test variant primary type
+    // TODO: test queryops
+
     protected function assertParsedFile($file, $expectedCnd)
     {
         $actualCnd = $this->parseFile($file);
