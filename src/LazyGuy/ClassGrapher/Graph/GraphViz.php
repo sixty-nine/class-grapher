@@ -71,7 +71,7 @@ class GraphViz
         $graph = "digraph G {\n$boilerplate\n";
 
         foreach ($this->nodes as $id => $label) {
-            $graph .= sprintf('%s [ label = "%s" ]', $id, $label) . "\n";
+            $graph .= sprintf('%s [ label = <%s> ]', $id, $label) . "\n";
         }
 
         foreach ($this->edges as $edge) {
