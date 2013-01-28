@@ -27,21 +27,19 @@ class BuildGraphCommand extends Command
         $dir = $input->getArgument('dir');
 
         $boilerplate = <<<EOF
-fontname = "Bitstream Vera Sans"
+fontname = "AvantGarde-Book"
 fontsize = 8
 layout = dot
 concentrate=true
 
 node [
-    fontname = "Bitstream Vera Sans"
+    fontname = "AvantGarde-Book"
     fontsize = 8
     shape = "box"
 ]
 
 edge [
     dir = "back"
-    fontname = "Bitstream Vera Sans"
-    fontsize = 8
     arrowtail = "empty"
 ]
 

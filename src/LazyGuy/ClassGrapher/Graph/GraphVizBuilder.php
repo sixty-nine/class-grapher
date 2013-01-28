@@ -92,7 +92,7 @@ class GraphVizBuilder
 
             // TODO: implement a different node style when $interface is true
 
-            $this->graph->addNode($id, $label);
+            $this->graph->addNode($id, $label, $interface);
 
             $this->counter += 1;
         }

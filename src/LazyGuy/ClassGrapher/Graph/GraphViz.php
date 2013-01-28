@@ -34,10 +34,10 @@ class GraphViz
      * @param $label The label of the node
      * @return void
      */
-    public function addNode($id, $label)
+    public function addNode($id, $label, $isInterface = false)
     {
         if (!array_key_exists($id, $this->nodes)) {
-            $this->nodes[$id] = $label;
+            $this->nodes[$id] = array('label' => $label, 'interface' => $isInterface);
         }
     }
 
@@ -70,8 +70,13 @@ class GraphViz
     {
         $graph = "digraph G {\n$boilerplate\n";
 
-        foreach ($this->nodes as $id => $label) {
-            $graph .= sprintf('%s [ label = <%s> ]', $id, $label) . "\n";
+        foreach ($this->nodes as $id => $node) {
+            if ($node['interface']) {
+                $dot = '%s [ label = <%s>, fontname="AvantGarde-BookOblique" ]';
+            } else {
+                $dot = '%s [ label = <%s> ]';
+            }
+            $graph .= sprintf($dot, $id, $node['label']) . "\n";
         }
 
         foreach ($this->edges as $edge) {
