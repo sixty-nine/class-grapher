@@ -6,9 +6,11 @@ use Symfony\Component\Console\Command\Command,
     Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Input\InputArgument,
-    Symfony\Component\Console\Input\InputOption,
-    LazyGuy\ClassGrapher\Graph\GraphVizBuilder,
-    LazyGuy\ClassGrapher\Model\ObjectTableBuilder;
+    Symfony\Component\Console\Input\InputOption;
+
+use LazyGuy\ClassGrapher\Graph\GraphBuilder,
+    LazyGuy\ClassGrapher\Model\ObjectTableBuilder,
+    LazyGuy\ClassGrapher\Graph\GraphRenderer;
 
 class BuildGraphCommand extends Command
 {
@@ -46,12 +48,13 @@ edge [
 EOF;
 
         $otBuilder = new ObjectTableBuilder();
+        $graphBuilder = new GraphBuilder();
+        $renderer = new GraphRenderer();
+
         $table = $otBuilder->build($dir);
+        $graph = $graphBuilder->build($table);
 
-        $builder = new GraphVizBuilder();
-        $graph = $builder->build($table);
-
-        $out = $graph->render($boilerplate);
+        $out = $renderer->render($graph, array('boilerplate' => $boilerplate));
 
         $output->writeln($out);
     }

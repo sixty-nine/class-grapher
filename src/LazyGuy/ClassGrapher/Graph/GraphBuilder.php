@@ -11,9 +11,9 @@ use LazyGuy\ClassGrapher\Model\ObjectTable,
 /**
  * Build a simple GraphViz inheritance graph from an object table
  *
- * @author D. Barsotti <info@dreamcraft.ch>
+ * @author D. Barsotti <sixtynine.db@gmail.com>
  */
-class GraphVizBuilder
+class GraphBuilder
 {
     /**
      * Lookup table for classes and interfaces already inserted in the graph
@@ -35,13 +35,13 @@ class GraphVizBuilder
     /**
      * Build the inheritance graph
      * @param \LazyGuy\ClassGrapher\Model\ObjectTable $table The object table
-     * @return \LazyGuy\ClassGrapher\Graph\GraphViz The inheritance graph
+     * @return \LazyGuy\ClassGrapher\Graph\Graph The inheritance graph
      */
     public function build(ObjectTable $table)
     {
         $this->nodes = array();
         $this->counter = 0;
-        $this->graph = new GraphViz();
+        $this->graph = new Graph();
 
         foreach($table as $item)
         {

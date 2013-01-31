@@ -5,9 +5,9 @@ namespace LazyGuy\ClassGrapher\Graph;
 /**
  * Generate simple GraphViz graphs
  *
- * @author D. Barsotti <info@dreamcraft.ch>
+ * @author D. Barsotti <sixtynine.db@gmail.com>
  */
-class GraphViz
+class Graph
 {
     /**
      * @var array
@@ -61,31 +61,13 @@ class GraphViz
         $this->edges[] = array($parent, $child);
     }
 
-    /**
-     * Render the graph as a DOT string
-     * @param string $boilerplate The boiler plate code that must be added to the graph.
-     * @return string The DOT representation of the graph
-     */
-    public function render($boilerplate = '')
+    public function getNodes()
     {
-        $graph = "digraph G {\n$boilerplate\n";
+        return $this->nodes;
+    }
 
-        foreach ($this->nodes as $id => $node) {
-            if ($node['interface']) {
-                $dot = '%s [ label = <%s>, fontname="AvantGarde-BookOblique" ]';
-            } else {
-                $dot = '%s [ label = <%s> ]';
-            }
-            $graph .= sprintf($dot, $id, $node['label']) . "\n";
-        }
-
-        foreach ($this->edges as $edge) {
-            list($parent, $child) = $edge;
-            $graph .= sprintf('%s -> %s', $parent, $child) . "\n";
-        }
-
-        $graph .= "\n}\n";
-
-        return $graph;
+    public function getEdges()
+    {
+        return $this->edges;
     }
 }

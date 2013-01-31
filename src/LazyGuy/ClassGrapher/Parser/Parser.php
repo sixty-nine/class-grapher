@@ -9,7 +9,7 @@ use LazyGuy\ClassGrapher\Model\ObjectTable,
 /**
  * Parse a PHP file through a tokenizer and extract the classes and interfaces information into an object table
  *
- * @author D. Barsotti <info@dreamcraft.ch>
+ * @author D. Barsotti <sixtynine.db@gmail.com>
  */
 class Parser
 {

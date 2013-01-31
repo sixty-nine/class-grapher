@@ -7,7 +7,7 @@ use LazyGuy\ClassGrapher\Helper\NamespaceHelper;
 /**
  * Resolve class names to fully qualified class names
  *
- * @author D. Barsotti <info@dreamcraft.ch>
+ * @author D. Barsotti <sixtynine.db@gmail.com>
  */
 class ClassResolver
 {
