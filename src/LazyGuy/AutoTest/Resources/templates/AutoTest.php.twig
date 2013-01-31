@@ -7,12 +7,16 @@ use {{fullClassName}};
 class {{className}}Test extends \PHPUnit_Framework_TestCase
 {
 {% for method in methods %}
+{% if phpdoc %}
     /**
      * Test for {{method}}
      */
+{% endif %}
     public function test{{method}}()
     {
+{% if methodstub %}
         // TODO: Add your code here
+{% endif %}
     }
 
 {% endfor %}
