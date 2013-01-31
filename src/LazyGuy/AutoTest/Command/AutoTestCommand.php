@@ -1,6 +1,6 @@
 <?php
 
-namespace LazyGuy\ClassGrapher\Command;
+namespace LazyGuy\AutoTest\Command;
 
 use Symfony\Component\Console\Command\Command,
     Symfony\Component\Console\Input\InputInterface,
@@ -28,6 +28,10 @@ class AutoTestCommand extends Command
 
         $otBuilder = new ObjectTableBuilder();
         $table = $otBuilder->build($file);
+
+        // TODO: nonono..
+        require_once '/home/dev/ClassGrapher/vendor/twig/twig/lib/Twig/Autoloader.php';
+        \Twig_Autoloader::register();
 
         $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../Resources/templates');
         $twig = new \Twig_Environment($loader);

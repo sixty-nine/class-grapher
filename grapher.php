@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-require 'vendor/.composer/autoload.php';
+require 'vendor/autoload.php';
 
-use LazyGuy\ClassGrapher\ClassGrapherApp;
+use LazyGuy\DevTools\DevToolsApp;
 
-$app = new ClassGrapherApp();
+$app = new DevToolsApp();
 $app->run();
