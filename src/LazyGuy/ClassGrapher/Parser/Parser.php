@@ -102,6 +102,26 @@ class Parser
             $alias = '';
             $fqn = $this->parseIdentifier();
 
+            /**
+             * TODO: There is a problem here: when an alias is set, its scope is the current file
+             * only. Otherwise the alias may mask another class namespace.
+             *
+             * Example:
+             *
+             * in file1.php:
+             *
+             * namespace A;
+             * class ClassA { ...
+             *
+             * in file2.php:
+             *
+             * namespace A;
+             *
+             * use B\ClassB as ClassA // This will replace the definition of ClassA in the resolver
+             *
+             * SOLUTION: at the end of the file, the aliases must be reset
+             */
+
             if ($this->tokenizer->peekToken()->type === T_AS) {
                 $this->tokenizer->expectToken(T_AS, false, true);
                 $alias = $this->parseIdentifier();
