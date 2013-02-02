@@ -43,14 +43,22 @@ class NamespaceTree {
 
         do {
 
+//            echo "NEW CYCLE\n";
             if (count($this->tree->children) === 1) {
                 foreach ($this->tree->children as $parentName => $child) {
-//                    if (count($child->children) !== 1) {
-//                        return;
-//                    }
-                    $this->tree->children = array();
+//                    echo "PARENT: $parentName\n";
+                    $newChildren = array();
+                    $abort = false;
                     foreach($child->children as $childName => $subchildren) {
-                        $this->tree->children[$parentName . '\\' . $childName] = $subchildren;
+//                        echo "CHILD: $childName\n";
+                        if (!empty($subchildren->data)) {
+                            break(3);
+                        }
+                        $newChildren[$parentName . '\\' . $childName] = $subchildren;
+                    }
+                    if (!$abort) {
+                        $this->tree->children = $newChildren;
+                        break;
                     }
                 }
             }

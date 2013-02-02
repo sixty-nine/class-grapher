@@ -29,6 +29,9 @@ class GraphBuilder
      */
     protected $counter;
 
+    /** @var int */
+    protected $clusterCounter;
+
     /**
      * @var \LazyGuy\ClassGrapher\Model\ObjectTable
      */
@@ -43,6 +46,7 @@ class GraphBuilder
     {
         $this->nodes = array();
         $this->counter = 0;
+        $this->clusterCounter = 0;
         $this->graph = new Graph();
         $nsTree = new NamespaceTree();
 
@@ -82,16 +86,21 @@ class GraphBuilder
         return $this->graph;
     }
 
-    protected function buildGroups(NamespaceTreeItem $node)
+    protected function buildGroups(NamespaceTreeItem $node, $curNamespace = '', $parentCluster = '')
     {
-        $counter = 1;
         foreach ($node->children as $name => $child) {
+
             $nodes = array();
+            $namespace = ($curNamespace === '' ? '' : $curNamespace . '\\') . $name;
+            $cluster = 'cluster_' . $this->clusterCounter;
+
             foreach ($child->data as $className) {
-                $nodes[] = $this->nodes[md5($name . '\\' . $className)];
+                $nodes[] = $this->nodes[md5($namespace . '\\' . $className)];
             }
-            $this->graph->addGroup('cluster_' . $counter, str_replace('\\', '/', $name), $nodes);
-            $counter++;
+            $this->graph->addGroup($cluster, str_replace('\\', '/', $name), $nodes, $parentCluster);
+            $this->clusterCounter++;
+
+            $this->buildGroups($child, $namespace, $cluster);
         }
 
     }

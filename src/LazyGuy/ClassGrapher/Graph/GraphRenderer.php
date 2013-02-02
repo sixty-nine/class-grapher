@@ -16,9 +16,10 @@ class GraphRenderer implements GraphRendererInterface
      */
     public function render(Graph $graph, $params = array())
     {
+//        die(var_dump($graph->getGroups()));
         $twig = \LazyGuy\AutoTest\Helper\Twig::getTwig(__DIR__ . '/../Resources/templates');
         return $twig->render(
-            'Graph.dot.twig',
+            'Graph1.dot.twig',
             array(
                 'baseFont' => 'AvantGarde-Book',
                 'classFont' => 'AvantGarde-Book',

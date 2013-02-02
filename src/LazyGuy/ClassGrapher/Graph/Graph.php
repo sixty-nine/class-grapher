@@ -2,6 +2,8 @@
 
 namespace LazyGuy\ClassGrapher\Graph;
 
+use LazyGuy\ClassGrapher\Helper\SimpleDictionary;
+
 /**
  * Generate simple GraphViz graphs
  *
@@ -15,7 +17,7 @@ class Graph
     /** @var array */
     protected $edges;
 
-    /** @var array */
+    /** @var SimpleTree */
     protected $groups;
 
     /**
@@ -25,7 +27,7 @@ class Graph
     {
         $this->nodes = array();
         $this->edges = array();
-        $this->groups = array();
+        $this->groups = new SimpleDictionary();
     }
 
     /**
@@ -61,13 +63,48 @@ class Graph
         $this->edges[] = array($parent, $child);
     }
 
-    public function addGroup($groupName, $name, $nodes) {
+    public function addGroup($groupName, $name, $nodes, $parentName = '')
+    {
+        if ($parentName === '') {
 
-        if (!array_key_exists($groupName, $this->groups)) {
-            $this->groups[$groupName] = array('name' => $name);
+            $parent = $this->groups;
+
+        } else {
+
+            $parent = $this->groups->find($parentName);
+
+            if (!$parent) {
+                throw new \InvalidArgumentException("Could not find parent node '$parentName'");
+            }
         }
 
-        $this->groups[$groupName]['nodes'] = $nodes;
+        if (!$parent->childExists($groupName)) {
+            $child = new SimpleDictionary();
+            $child->setData(array('name' => $name, 'nodes' => $nodes));
+            $parent->addChild($groupName, $child);
+        }
+    }
+
+    protected function &search(&$groups, $name) {
+
+        var_dump("SEARCH $name, GROUPS = " . print_r($groups, 1));
+        if (array_key_exists($name, $groups)) {
+            var_dump("FOUND");
+            return $groups[$name]['groups'];
+        }
+
+        var_dump("NOT DIRECTLY FOUND");
+
+        foreach ($groups as $key => $subgroup) {
+            var_dump("LOOKING INTO $key");
+            if ($res = $this->search($subgroup['groups'], $name)) {
+                var_dump("FOUND IN SUBGROUP");
+                return $res;
+            }
+        }
+
+//        die(var_dump('NOTFOUND '.$name.','.print_r($groups)));
+        return $groups;
     }
 
     public function getNodes()

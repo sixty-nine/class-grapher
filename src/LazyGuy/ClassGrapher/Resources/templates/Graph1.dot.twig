@@ -1,0 +1,45 @@
+digraph G {
+
+    fontname = "{{baseFont}}"
+    fontsize = 8
+    layout = dot
+    concentrate=true
+    ranksep = 0.1
+
+    node [
+        fontname = "{{classFont}}"
+        fontsize = 8
+        shape = "box"
+        style = rounded
+        height = 0.25
+    ]
+
+    edge [
+        dir = "back"
+        arrowtail = "empty"
+    ]
+
+{% for id, node in nodes %}
+{% if node.interface %}
+    {{id}} [ label = <{{node.label}}>, fontname="{{interfaceFont}}", color=grey75 ]
+{% else %}
+    {{id}} [ label = <{{node.label}}> ]
+{% endif %}
+{% endfor %}
+
+{% if useedges %}
+{% for edge in edges %}
+    {{edge[0]}} -> {{edge[1]}}
+{% endfor %}
+{% endif %}
+
+
+{% if usegroups %}
+
+{% for id,cluster in groups.children %}
+{% include "Graph1Subgraph.dot.twig" with {'id': id, 'cluster': cluster} %}
+{% endfor %}
+
+{% endif %}
+
+}
