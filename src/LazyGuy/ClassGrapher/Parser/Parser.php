@@ -51,6 +51,8 @@ class Parser
         $this->classResolver = $classResolver;
         $this->objectTable = $objectTable;
         $this->curNamespace = '';
+
+        $classResolver->resetAliases();
     }
 
     /**

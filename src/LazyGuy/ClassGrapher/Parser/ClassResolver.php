@@ -16,6 +16,8 @@ class ClassResolver
      */
     protected $use;
 
+    protected $aliases;
+
     /**
      * @var string
      */
@@ -27,6 +29,7 @@ class ClassResolver
     public function __construct()
     {
         $this->use = array();
+        $this->aliases = array();
         $this->curNamespace = '';
     }
 
@@ -39,12 +42,21 @@ class ClassResolver
     public function addUse($fqn, $alias = '')
     {
         if ($alias === '') {
-            $alias = NamespaceHelper::getBasename($fqn);
+            $key = NamespaceHelper::getBasename($fqn);
+            $array = &$this->use;
+        } else {
+            $key = $alias;
+            $array = &$this->aliases;
         }
 
-        if (!array_key_exists($alias, $this->use)) {
-            $this->use[$alias] = $fqn;
+        if (!array_key_exists($key, $array)) {
+            $array[$key] = $fqn;
         }
+    }
+
+    public function resetAliases()
+    {
+        $this->aliases = array();
     }
 
     /**
@@ -76,6 +88,14 @@ class ClassResolver
             }
             return $this->use[$name];
         }
+
+        if (array_key_exists($search, $this->aliases)) {
+            if ($pos !== false) {
+                return $this->aliases[$search] . substr($name, $pos);
+            }
+            return $this->aliases[$name];
+        }
+
         if (substr($name, 0, 1) === '\\') {
             return $name;
         }

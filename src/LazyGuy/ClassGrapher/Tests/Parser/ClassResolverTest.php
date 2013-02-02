@@ -12,13 +12,15 @@ class ClassResolverTest extends \PHPUnit_Framework_TestCase
 
         $resolver = new ClassResolver();
         $resolver->addUse($fqn, 'MyClass');
-        $this->assertAttributeEquals(array('MyClass' => $fqn), 'use', $resolver);
+        $this->assertAttributeEquals(array('MyClass' => $fqn), 'aliases', $resolver);
 
         $resolver->addUse($fqn);
-        $this->assertAttributeEquals(array('MyClass' => $fqn, 'ClassResolver' => $fqn), 'use', $resolver);
+        $this->assertAttributeEquals(array('ClassResolver' => $fqn), 'use', $resolver);
+        $this->assertAttributeEquals(array('MyClass' => $fqn), 'aliases', $resolver);
 
         $resolver->addUse($fqn);
-        $this->assertAttributeEquals(array('MyClass' => $fqn, 'ClassResolver' => $fqn), 'use', $resolver);
+        $this->assertAttributeEquals(array('ClassResolver' => $fqn), 'use', $resolver);
+        $this->assertAttributeEquals(array('MyClass' => $fqn), 'aliases', $resolver);
     }
 
     public function testResolve()

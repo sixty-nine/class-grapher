@@ -3,14 +3,14 @@
 namespace LazyGuy\PhpParse\Exception;
 
 use LazyGuy\PhpParse\Scanner\TokenQueue,
-    LazyGuy\PhpParse\Scanner\GenericToken;
+    LazyGuy\PhpParse\Scanner\Token As Token;
 
 class ParserException extends \Exception
 {
     public function __construct(TokenQueue $queue, $msg)
     {
         $token = $queue->peek();
-        $msg = sprintf("PARSER ERROR: %s. Current token is [%s, '%s'] at line %s, column %s", $msg, GenericToken::getTypeName($token->getType()), $token->getData(), $token->getLine(), $token->getRow());
+        $msg = sprintf("PARSER ERROR: %s. Current token is [%s, '%s'] at line %s, column %s", $msg, Token::getTypeName($token->getType()), $token->getData(), $token->getLine(), $token->getRow());
 
         // construct a lookup of the next tokens
         $lookup = '';
