@@ -19,7 +19,7 @@ class GraphRenderer implements GraphRendererInterface
 //        die(var_dump($graph->getGroups()));
         $twig = \LazyGuy\AutoTest\Helper\Twig::getTwig(__DIR__ . '/../Resources/templates');
         return $twig->render(
-            'Graph1.dot.twig',
+            'Graph.dot.twig',
             array(
                 'baseFont' => 'AvantGarde-Book',
                 'classFont' => 'AvantGarde-Book',

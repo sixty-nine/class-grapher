@@ -4,7 +4,7 @@
             labelloc = "b"
 
 {% for name, node in cluster.children %}
-{% include "Graph1Subgraph.dot.twig" with {'id': name, 'cluster': node} %}
+{% include "GraphSubgraph.dot.twig" with {'id': name, 'cluster': node} %}
 {% endfor %}
 
 {% for node in cluster.data.nodes %}

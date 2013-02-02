@@ -10,6 +10,8 @@ digraph G {
         fontname = "{{classFont}}"
         fontsize = 8
         shape = "box"
+        style = rounded
+        height = 0.25
     ]
 
     edge [
@@ -19,7 +21,7 @@ digraph G {
 
 {% for id, node in nodes %}
 {% if node.interface %}
-    {{id}} [ label = <{{node.label}}>, fontname="{{interfaceFont}}" ]
+    {{id}} [ label = <{{node.label}}>, fontname="{{interfaceFont}}", color=grey75 ]
 {% else %}
     {{id}} [ label = <{{node.label}}> ]
 {% endif %}
@@ -31,15 +33,13 @@ digraph G {
 {% endfor %}
 {% endif %}
 
+
 {% if usegroups %}
-{% for id,group in groups %}
-    subgraph {{id}} {
-        label = "{{group.name}}"
-{% for node in group.nodes %}
-        {{node}}
+
+{% for id,cluster in groups.children %}
+{% include "GraphSubgraph.dot.twig" with {'id': id, 'cluster': cluster} %}
 {% endfor %}
-    }
-{% endfor %}
+
 {% endif %}
 
 }
