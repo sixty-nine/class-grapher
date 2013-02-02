@@ -85,28 +85,6 @@ class Graph
         }
     }
 
-    protected function &search(&$groups, $name) {
-
-        var_dump("SEARCH $name, GROUPS = " . print_r($groups, 1));
-        if (array_key_exists($name, $groups)) {
-            var_dump("FOUND");
-            return $groups[$name]['groups'];
-        }
-
-        var_dump("NOT DIRECTLY FOUND");
-
-        foreach ($groups as $key => $subgroup) {
-            var_dump("LOOKING INTO $key");
-            if ($res = $this->search($subgroup['groups'], $name)) {
-                var_dump("FOUND IN SUBGROUP");
-                return $res;
-            }
-        }
-
-//        die(var_dump('NOTFOUND '.$name.','.print_r($groups)));
-        return $groups;
-    }
-
     public function getNodes()
     {
         return $this->nodes;
