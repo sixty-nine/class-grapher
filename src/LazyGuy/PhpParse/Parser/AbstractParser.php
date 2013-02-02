@@ -2,7 +2,7 @@
 
 namespace LazyGuy\PhpParse\Parser;
 
-use LazyGuy\PhpParse\Scanner\GenericToken as Token,
+use LazyGuy\PhpParse\Scanner\GenericToken,
     LazyGuy\PhpParse\Scanner\TokenQueue,
     LazyGuy\PhpParse\Exception\ParserException,
     LazyGuy\PhpParse\Helper\AbstractDebuggable;
@@ -74,7 +74,7 @@ abstract class AbstractParser extends AbstractDebuggable implements ParserInterf
         $token = $this->tokenQueue->peek();
 
         if (!$this->checkToken($type, $data)) {
-            throw new ParserException($this->tokenQueue, sprintf("Expected token [%s, '%s']", Token::getTypeName($type), $data));
+            throw new ParserException($this->tokenQueue, sprintf("Expected token [%s, '%s']", GenericToken::getTypeName($type), $data));
         }
 
         $this->tokenQueue->next();

@@ -2,7 +2,7 @@
 
 namespace LazyGuy\PhpParse\Parser;
 
-use LazyGuy\PhpParse\Scanner\GenericToken as Token,
+use LazyGuy\PhpParse\Scanner\GenericToken,
     LazyGuy\PhpParse\Scanner\TokenQueue,
     LazyGuy\PhpParse\Exception\ParserException;
 
@@ -35,7 +35,7 @@ class CndParser extends AbstractParser
 
             $this->debugSection('PARSER CYCLE');
 
-            while ($this->checkToken(Token::TK_SYMBOL, '<')) {
+            while ($this->checkToken(GenericToken::TK_SYMBOL, '<')) {
                 $nsMapping->addChild($this->parseNamespaceMapping());
             }
 
@@ -64,11 +64,11 @@ class CndParser extends AbstractParser
     {
         $this->debug('parseNamespaceMapping');
 
-        $this->expectToken(Token::TK_SYMBOL, '<');
+        $this->expectToken(GenericToken::TK_SYMBOL, '<');
         $prefix = $this->parseCndString();
-        $this->expectToken(Token::TK_SYMBOL, '=');
+        $this->expectToken(GenericToken::TK_SYMBOL, '=');
         $uri = substr($this->expectToken(Token::TK_STRING)->getData(), 1, -1);
-        $this->expectToken(Token::TK_SYMBOL, '>');
+        $this->expectToken(GenericToken::TK_SYMBOL, '>');
 
         $this->debugRes("nsmapping: $prefix => $uri");
 
@@ -93,7 +93,7 @@ class CndParser extends AbstractParser
         $node = new SyntaxTreeNode('nodeTypeDef');
         $node->addChild($this->parseNodeTypeName());
 
-        if ($this->checkToken(Token::TK_SYMBOL, '>')) {
+        if ($this->checkToken(GenericToken::TK_SYMBOL, '>')) {
             $node->addChild($this->parseSupertypes());
         }
 
@@ -121,9 +121,9 @@ class CndParser extends AbstractParser
     {
         $this->debug('parseNodeTypeName');
 
-        $this->expectToken(Token::TK_SYMBOL, '[');
+        $this->expectToken(GenericToken::TK_SYMBOL, '[');
         $name = $this->parseCndString();
-        $this->expectToken(Token::TK_SYMBOL, ']');
+        $this->expectToken(GenericToken::TK_SYMBOL, ']');
 
         $this->debugRes("nodeTypeName: $name");
 
@@ -144,11 +144,11 @@ class CndParser extends AbstractParser
     {
         $this->debug('parseSupertypes');
 
-        $this->expectToken(Token::TK_SYMBOL, '>');
+        $this->expectToken(GenericToken::TK_SYMBOL, '>');
 
         $supertypes = new SyntaxTreeNode('supertypes');
 
-        if ($this->checkAndExpectToken(Token::TK_SYMBOL, '?')) {
+        if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '?')) {
             $supertypes->setProperty('value', '?');
             $display = '?';
         } else {
@@ -218,9 +218,9 @@ class CndParser extends AbstractParser
 
         while (true) {
 
-            if ($this->checkToken(Token::TK_SYMBOL, '-')) {
+            if ($this->checkToken(GenericToken::TK_SYMBOL, '-')) {
                 $propDefs->addChild($this->parsePropDef());
-            } elseif ($this->checkToken(Token::TK_SYMBOL, '+')) {
+            } elseif ($this->checkToken(GenericToken::TK_SYMBOL, '+')) {
                 $childNodeDef->addChild($this->parseChildNodeDef());
             } else {
                 break;
@@ -262,8 +262,8 @@ class CndParser extends AbstractParser
         $node = new SyntaxTreeNode('propertyDef');
 
         // Parse the property name
-        $this->expectToken(Token::TK_SYMBOL, '-');
-        if ($this->checkAndExpectToken(Token::TK_SYMBOL, '*')) {
+        $this->expectToken(GenericToken::TK_SYMBOL, '-');
+        if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '*')) {
             $name = '*';
         } else {
             $name = $this->parseCndString();
@@ -271,12 +271,12 @@ class CndParser extends AbstractParser
         $node->addChild(new SyntaxTreeNode('propertyName', array('value' => $name)));
 
         // Parse the property type
-        if ($this->checkToken(Token::TK_SYMBOL, '(')) {
+        if ($this->checkToken(GenericToken::TK_SYMBOL, '(')) {
             $node->addChild($this->parsePropertyType());
         }
 
         // Parse default value
-        if ($this->checkToken(Token::TK_SYMBOL, '=')) {
+        if ($this->checkToken(GenericToken::TK_SYMBOL, '=')) {
             $node->addChild($this->parseDefaultValue());
         }
 
@@ -317,14 +317,14 @@ class CndParser extends AbstractParser
         $types = array("STRING", "BINARY", "LONG", "DOUBLE", "BOOLEAN",  "DATE", "NAME", "PATH",
                        "REFERENCE", "WEAKREFERENCE", "DECIMAL", "URI", "UNDEFINED", "*", "?");
 
-        $this->expectToken(Token::TK_SYMBOL, '(');
+        $this->expectToken(GenericToken::TK_SYMBOL, '(');
 
         $data = $this->tokenQueue->get()->getData();
         if (!in_array($data, $types)) {
             throw new ParserException($this->tokenQueue, sprintf("Invalid property type: %s", $data));
         }
 
-        $this->expectToken(Token::TK_SYMBOL, ')');
+        $this->expectToken(GenericToken::TK_SYMBOL, ')');
 
         $this->debugRes('propertyType: ' . $data);
 
@@ -346,9 +346,9 @@ class CndParser extends AbstractParser
         $this->debug('parseDefaultValues');
 
         // TODO: parse ?
-        $this->expectToken(Token::TK_SYMBOL, '=');
+        $this->expectToken(GenericToken::TK_SYMBOL, '=');
 
-        if ($this->checkAndExpectToken(Token::TK_SYMBOL, '?')) {
+        if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '?')) {
             $list = array('?');
         } else {
             $list = $this->parseCndStringList();
@@ -372,9 +372,9 @@ class CndParser extends AbstractParser
     {
         $this->debug('parseValueConstraints');
 
-        $this->expectToken(Token::TK_SYMBOL, '<');
+        $this->expectToken(GenericToken::TK_SYMBOL, '<');
 
-        if ($this->checkAndExpectToken(Token::TK_SYMBOL, '?')) {
+        if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '?')) {
             $list = array('?');
         } else {
             $list = $this->parseCndStringList();
@@ -526,10 +526,10 @@ class CndParser extends AbstractParser
 
         $node = new SyntaxTreeNode('childNodeDef');
 
-        $this->expectToken(Token::TK_SYMBOL, '+');
+        $this->expectToken(GenericToken::TK_SYMBOL, '+');
 
         // Parse the property name
-        if ($this->checkAndExpectToken(Token::TK_SYMBOL, '*')) {
+        if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '*')) {
             $name = '*';
         } else {
             $name = $this->parseCndString();
@@ -537,19 +537,19 @@ class CndParser extends AbstractParser
         $node->addChild(new SyntaxTreeNode('nodeName', array('value' => $name)));
 
         // Parse the required types
-        if ($this->checkAndExpectToken(Token::TK_SYMBOL, '(')) {
-            if ($this->checkAndExpectToken(Token::TK_SYMBOL, '?')) {
+        if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '(')) {
+            if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '?')) {
                 $list = '?';
             } else {
                 $list = $this->parseCndStringList();
             }
-            $this->expectToken(Token::TK_SYMBOL, ')');
+            $this->expectToken(GenericToken::TK_SYMBOL, ')');
 
             $node->addChild(new SyntaxTreeNode('requiredTypes', array('value' => $list)));
         }
 
         // Parse the default type
-        if ($this->checkAndExpectToken(Token::TK_SYMBOL, '=')) {
+        if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '=')) {
             $node->addChild(new SyntaxTreeNode('defaultType', array('value' => $this->parseCndString())));
         }
 
@@ -576,7 +576,7 @@ class CndParser extends AbstractParser
         $strings = array();
 
         $strings[] = $this->parseCndString();
-        while ($this->checkAndExpectToken(Token::TK_SYMBOL, ',')) {
+        while ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, ',')) {
             $strings[] = $this->parseCndString();
         }
 
@@ -621,20 +621,20 @@ class CndParser extends AbstractParser
             $type = $token->getType();
             $data = $token->getData();
 
-            IF ($type === Token::TK_STRING) {
+            IF ($type === GenericToken::TK_STRING) {
                 $string = substr($data, 1, -1);
                 $this->tokenQueue->next();
                 return $string;
             }
 
             // If it's not an identifier or a symbol allowed in a string, break
-            if ($type !== Token::TK_IDENTIFIER && $type !== Token::TK_SYMBOL
-            || ($type === Token::TK_SYMBOL && $data !== '_' && $data !== ':')) {
+            if ($type !== GenericToken::TK_IDENTIFIER && $type !== GenericToken::TK_SYMBOL
+            || ($type === GenericToken::TK_SYMBOL && $data !== '_' && $data !== ':')) {
                 break;
             }
 
             // Detect spaces (an identifier cannot be followed by an identifier as it would have been read as a single token)
-            if ($type === Token::TK_IDENTIFIER && $lastType === Token::TK_IDENTIFIER) {
+            if ($type === GenericToken::TK_IDENTIFIER && $lastType === GenericToken::TK_IDENTIFIER) {
                 break;
             }
 
@@ -799,7 +799,7 @@ class CndParser extends AbstractParser
 
                 // If this attribute can ba variant
                 if ($def['variant']) {
-                    if ($this->checkAndExpectToken(Token::TK_SYMBOL, '?')) {
+                    if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '?')) {
                         $variant = true;
                     }
                 }
@@ -840,7 +840,7 @@ class CndParser extends AbstractParser
              *      PrimaryItem ::= ('primaryitem'| '!')(String | '?')
              */
 
-            if ($this->checkAndExpectToken(Token::TK_SYMBOL, '?')) {
+            if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '?')) {
                 return new SyntaxTreeNode('primaryitem', array('value' => '?'));
             }
             return new SyntaxTreeNode('primaryitem', array('value' => $this->parseCndString()));
@@ -867,7 +867,7 @@ class CndParser extends AbstractParser
      */
     protected function parseQueryOpsAttribute()
     {
-        if ($this->checkAndExpectToken(Token::TK_SYMBOL, '?')) {
+        if ($this->checkAndExpectToken(GenericToken::TK_SYMBOL, '?')) {
             return new SyntaxTreeNode('queryops', array('variant' => true));
         }
 
@@ -877,7 +877,7 @@ class CndParser extends AbstractParser
             $op = $this->parseQueryOperator();
             $ops[] = $op;
 
-        } while ($op && $this->checkAndExpectToken(Token::TK_SYMBOL, ','));
+        } while ($op && $this->checkAndExpectToken(GenericToken::TK_SYMBOL, ','));
 
         if (empty($ops)) {
             // There must be at least an operator if this attribute is not variant

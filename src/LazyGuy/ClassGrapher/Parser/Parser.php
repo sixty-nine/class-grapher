@@ -231,7 +231,6 @@ class Parser
     protected function addClassToTable($name, $extends, $implements)
     {
         $name = $this->curNamespace . '\\' . $name;
-
         $resolvedExtends = array();
         foreach($extends as $extend) {
             $resolvedExtends[] = $this->classResolver->resolve($extend);

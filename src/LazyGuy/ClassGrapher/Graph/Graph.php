@@ -9,15 +9,14 @@ namespace LazyGuy\ClassGrapher\Graph;
  */
 class Graph
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $nodes;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $edges;
+
+    /** @var array */
+    protected $groups;
 
     /**
      * Constructor
@@ -26,6 +25,7 @@ class Graph
     {
         $this->nodes = array();
         $this->edges = array();
+        $this->groups = array();
     }
 
     /**
@@ -61,6 +61,15 @@ class Graph
         $this->edges[] = array($parent, $child);
     }
 
+    public function addGroup($groupName, $name, $nodes) {
+
+        if (!array_key_exists($groupName, $this->groups)) {
+            $this->groups[$groupName] = array('name' => $name);
+        }
+
+        $this->groups[$groupName]['nodes'] = $nodes;
+    }
+
     public function getNodes()
     {
         return $this->nodes;
@@ -69,5 +78,10 @@ class Graph
     public function getEdges()
     {
         return $this->edges;
+    }
+
+    public function getGroups()
+    {
+        return $this->groups;
     }
 }

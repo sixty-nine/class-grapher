@@ -17,7 +17,7 @@ class AutoTestCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('lazyguy:autotest:generate')
+            ->setName('autotest:generate')
             ->setDescription('Generate phpunit tests stubs for a given class')
             ->setHelp('Generate phpunit tests stubs for a given class')
             ->addArgument('path', InputArgument::REQUIRED, 'The php file(s) to generate tests stubs for')

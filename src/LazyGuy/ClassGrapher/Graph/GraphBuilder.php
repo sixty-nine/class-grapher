@@ -7,6 +7,8 @@ use LazyGuy\ClassGrapher\Model\ObjectTable,
     LazyGuy\ClassGrapher\Model\ClassItem,
     LazyGuy\ClassGrapher\Model\InterfaceItem,
     LazyGuy\ClassGrapher\Helper\NamespaceHelper;
+use LazyGuy\ClassGrapher\Helper\NamespaceTreeItem;
+use LazyGuy\ClassGrapher\Helper\NamespaceTree;
 
 /**
  * Build a simple GraphViz inheritance graph from an object table
@@ -42,6 +44,7 @@ class GraphBuilder
         $this->nodes = array();
         $this->counter = 0;
         $this->graph = new Graph();
+        $nsTree = new NamespaceTree();
 
         foreach($table as $item)
         {
@@ -57,6 +60,7 @@ class GraphBuilder
                     $this->addNode($interfaceName, true);
                     $this->graph->addEdge($this->nodes[$interfaceHash], $this->nodes[$nodeHash]);
                 }
+
             } else {
 
                 $this->addNode($item->getName(), true);
@@ -69,9 +73,27 @@ class GraphBuilder
                 $this->graph->addEdge($this->nodes[$parentHash], $this->nodes[$nodeHash]);
             }
 
+            $nsTree->addClass($item->getName());
         }
 
+        $nsTree->pruneAndMerge();
+        $this->buildGroups($nsTree->getTree());
+
         return $this->graph;
+    }
+
+    protected function buildGroups(NamespaceTreeItem $node)
+    {
+        $counter = 1;
+        foreach ($node->children as $name => $child) {
+            $nodes = array();
+            foreach ($child->data as $className) {
+                $nodes[] = $this->nodes[md5($name . '\\' . $className)];
+            }
+            $this->graph->addGroup('cluster_' . $counter, str_replace('\\', '/', $name), $nodes);
+            $counter++;
+        }
+
     }
 
     /**
@@ -89,8 +111,6 @@ class GraphBuilder
             $id = 'node_' . $this->counter;
             $this->nodes[$hash] = $id;
             $label = NamespaceHelper::getBasename($name);
-
-            // TODO: implement a different node style when $interface is true
 
             $this->graph->addNode($id, $label, $interface);
 

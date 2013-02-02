@@ -17,35 +17,18 @@ class BuildGraphCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('lazyguy:graph')
-            ->setDescription('')
-            ->setHelp('')
+            ->setName('graph')
+            ->setDescription('Generate a class diagram in GraphViz format')
+            ->setHelp('Generate a class diagram in GraphViz format')
             ->addArgument('dir', InputArgument::REQUIRED, '')
+            ->addOption('groups', null, InputOption::VALUE_OPTIONAL, 'Group by namespace', false)
+            ->addOption('edges', null, InputOption::VALUE_OPTIONAL, 'Show edges', true)
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $dir = $input->getArgument('dir');
-
-        $boilerplate = <<<EOF
-fontname = "AvantGarde-Book"
-fontsize = 8
-layout = dot
-concentrate=true
-
-node [
-    fontname = "AvantGarde-Book"
-    fontsize = 8
-    shape = "box"
-]
-
-edge [
-    dir = "back"
-    arrowtail = "empty"
-]
-
-EOF;
 
         $otBuilder = new ObjectTableBuilder();
         $graphBuilder = new GraphBuilder();
@@ -54,7 +37,13 @@ EOF;
         $table = $otBuilder->build($dir);
         $graph = $graphBuilder->build($table);
 
-        $out = $renderer->render($graph, array('boilerplate' => $boilerplate));
+        $out = $renderer->render(
+            $graph,
+            array(
+                'use-groups' => $input->getOption('groups'),
+                'use-edges' => $input->getOption('edges'),
+            )
+        );
 
         $output->writeln($out);
     }

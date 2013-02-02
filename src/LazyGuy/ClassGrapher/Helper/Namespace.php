@@ -13,6 +13,11 @@ class _Namespace {
         }
     }
 
+    public function getParts()
+    {
+        return $this->parts;
+    }
+
     /**
      * Insert the namespace $name at $position in the given $namespace.
      *
