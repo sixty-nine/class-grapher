@@ -23,6 +23,8 @@ digraph G {
         fontname = "AvantGarde-Book"
         fontsize = 8
         shape = "box"
+        style = rounded
+        height = 0.25
     ]
 
     edge [
@@ -30,9 +32,9 @@ digraph G {
         arrowtail = "empty"
     ]
 
-    node_0 [ label = <MyInterface1>, fontname="AvantGarde-BookOblique" ]
-    node_1 [ label = <MyInterface2>, fontname="AvantGarde-BookOblique" ]
-    node_2 [ label = <MyInterface3>, fontname="AvantGarde-BookOblique" ]
+    node_0 [ label = <MyInterface1>, fontname="AvantGarde-BookOblique", color=grey75 ]
+    node_1 [ label = <MyInterface2>, fontname="AvantGarde-BookOblique", color=grey75 ]
+    node_2 [ label = <MyInterface3>, fontname="AvantGarde-BookOblique", color=grey75 ]
     node_3 [ label = <MyClass1> ]
     node_4 [ label = <GraphViz> ]
     node_5 [ label = <MyClass2> ]
@@ -49,6 +51,7 @@ digraph G {
     node_4 -> node_6
     node_0 -> node_7
     node_1 -> node_7
+
 
 
 }

@@ -4,6 +4,7 @@ namespace LazyGuy\PhpParse\Tests\Scanner;
 
 use LazyGuy\PhpParse\Scanner\GenericScanner,
     LazyGuy\PhpParse\Reader\FileReader,
+    LazyGuy\PhpParse\Scanner\Token,
     LazyGuy\PhpParse\Scanner\GenericToken,
     LazyGuy\PhpParse\Scanner\TokenQueue,
     LazyGuy\PhpParse\Scanner\TokenFilter,

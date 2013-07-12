@@ -13,7 +13,7 @@ class NamespaceTreeTest extends \PHPUnit_Framework_TestCase
         $nst->addClass('NS1\\NS2\\NS3\\bla');
         $nst->addClass('NS1\\NS2\\NS3\\NS4\\test');
         $nst->addClass('NS1\\NS2\\NS3\\NS4\\test');
-        var_dump($nst);
+//        var_dump($nst);
         $nst->pruneAndMerge();
     }
 
