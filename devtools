@@ -3,7 +3,7 @@
 
 require 'vendor/autoload.php';
 
-use LazyGuy\DevTools\DevToolsApp;
+use SixtyNine\DevTools\DevToolsApp;
 
 $app = new DevToolsApp();
 $app->run();
