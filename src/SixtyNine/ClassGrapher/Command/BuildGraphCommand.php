@@ -21,8 +21,8 @@ class BuildGraphCommand extends Command
             ->setDescription('Generate a class diagram in GraphViz format')
             ->setHelp('Generate a class diagram in GraphViz format')
             ->addArgument('dir', InputArgument::REQUIRED, '')
-            ->addOption('groups', null, InputOption::VALUE_OPTIONAL, 'Group by namespace', false)
-            ->addOption('edges', null, InputOption::VALUE_OPTIONAL, 'Show edges', true)
+            ->addOption('groups', null, InputOption::VALUE_NONE, 'Group by namespace')
+            ->addOption('noedges', null, InputOption::VALUE_NONE, 'Don\'t show the edges')
         ;
     }
 
@@ -40,8 +40,8 @@ class BuildGraphCommand extends Command
         $out = $renderer->render(
             $graph,
             array(
-                'use-groups' => $input->getOption('groups'),
-                'use-edges' => $input->getOption('edges'),
+                'use-groups' => $input->hasParameterOption('--groups'),
+                'use-edges' => !$input->hasParameterOption('--noedges'),
             )
         );
 

@@ -50,6 +50,8 @@ a class diagram of the class grapher code:
 php devtools graph src/ | dot -T png | display
 ```
 
+You can use the ```--groups``` option to group the classes by namespace and the ```--noedges``` option to not display relations between the classes.
+
 Running the tests
 -----------------
 
