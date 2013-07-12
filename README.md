@@ -47,12 +47,12 @@ Assumed you have ImageMagick installed you can run the following command to gene
 a class diagram of the class grapher code:
 
 ```
-php grapher.php lazyguy:graph src/ | dot -T png | display
+php devtools graph src/ | dot -T png | display
 ```
 
 Running the tests
 -----------------
 
 ```
-phpunit -c src/LazyGuy/ClassGrapher/Tests/
+phpunit -c tests/
 ```
