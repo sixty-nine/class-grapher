@@ -8,10 +8,10 @@
 
     "autoload": {
         "psr-0": {
-            "LazyGuy\\ClassGrapher": "src",
-            "LazyGuy\\AutoTest": "src",
-            "LazyGuy\\DevTools": "src",
-            "LazyGuy\\PhpParse": "src"
+            "SixtyNine\\ClassGrapher": "src",
+            "SixtyNine\\AutoTest": "src",
+            "SixtyNine\\DevTools": "src",
+            "SixtyNine\\PhpParse": "src"
         }
     }
 
