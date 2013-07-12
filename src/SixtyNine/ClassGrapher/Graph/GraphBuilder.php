@@ -2,11 +2,9 @@
 
 namespace SixtyNine\ClassGrapher\Graph;
 
-use SixtyNine\ClassGrapher\Model\ObjectTable,
-    SixtyNine\ClassGrapher\Model\ItemInterface,
-    SixtyNine\ClassGrapher\Model\ClassItem,
-    SixtyNine\ClassGrapher\Model\InterfaceItem,
-    SixtyNine\ClassGrapher\Helper\NamespaceHelper;
+use SixtyNine\ClassGrapher\Model\ObjectTable;
+use SixtyNine\ClassGrapher\Model\ClassItem;
+use SixtyNine\ClassGrapher\Helper\NamespaceHelper;
 use SixtyNine\ClassGrapher\Helper\NamespaceTreeItem;
 use SixtyNine\ClassGrapher\Helper\NamespaceTree;
 

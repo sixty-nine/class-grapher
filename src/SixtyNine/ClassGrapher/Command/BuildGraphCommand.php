@@ -2,15 +2,15 @@
 
 namespace SixtyNine\ClassGrapher\Command;
 
-use Symfony\Component\Console\Command\Command,
-    Symfony\Component\Console\Input\InputInterface,
-    Symfony\Component\Console\Output\OutputInterface,
-    Symfony\Component\Console\Input\InputArgument,
-    Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
-use SixtyNine\ClassGrapher\Graph\GraphBuilder,
-    SixtyNine\ClassGrapher\Model\ObjectTableBuilder,
-    SixtyNine\ClassGrapher\Graph\GraphRenderer;
+use SixtyNine\ClassGrapher\Graph\GraphBuilder;
+use SixtyNine\ClassGrapher\Model\ObjectTableBuilder;
+use SixtyNine\ClassGrapher\Graph\GraphRenderer;
 
 class BuildGraphCommand extends Command
 {

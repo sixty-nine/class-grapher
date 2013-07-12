@@ -2,10 +2,10 @@
 
 namespace SixtyNine\ClassGrapher\Model;
 
-use SixtyNine\ClassGrapher\Helper\FileFinder,
-    SixtyNine\ClassGrapher\Parser\ClassResolver,
-    SixtyNine\ClassGrapher\Parser\Parser,
-    SixtyNine\ClassGrapher\Parser\Tokenizer;
+use SixtyNine\ClassGrapher\Helper\FileFinder;
+use SixtyNine\ClassGrapher\Parser\ClassResolver;
+use SixtyNine\ClassGrapher\Parser\Parser;
+use SixtyNine\ClassGrapher\Parser\Tokenizer;
 
 class ObjectTableBuilder
 {

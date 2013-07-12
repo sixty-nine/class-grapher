@@ -2,8 +2,8 @@
 
 namespace SixtyNine\PhpParse\Tests\Scanner;
 
-use SixtyNine\PhpParse\Scanner\Token,
-    SixtyNine\PhpParse\Scanner\TokenQueue;
+use SixtyNine\PhpParse\Scanner\Token;
+use SixtyNine\PhpParse\Scanner\TokenQueue;
 
 class TokenQueueTest extends \PHPUnit_Framework_TestCase
 {

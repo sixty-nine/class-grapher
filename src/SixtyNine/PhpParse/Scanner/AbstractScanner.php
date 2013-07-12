@@ -2,8 +2,8 @@
 
 namespace SixtyNine\PhpParse\Scanner;
 
-use SixtyNine\PhpParse\Helper\AbstractDebuggable,
-    SixtyNine\PhpParse\Reader\ReaderInterface;
+use SixtyNine\PhpParse\Helper\AbstractDebuggable;
+use SixtyNine\PhpParse\Reader\ReaderInterface;
 
 abstract class AbstractScanner extends AbstractDebuggable implements ScannerInterface
 {

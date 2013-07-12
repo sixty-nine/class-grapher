@@ -2,12 +2,12 @@
 
 namespace SixtyNine\ClassGrapher\Tests\Parser;
 
-use SixtyNine\ClassGrapher\Parser\ClassResolver,
-    SixtyNine\ClassGrapher\Parser\Tokenizer,
-    SixtyNine\ClassGrapher\Parser\Parser,
-    SixtyNine\ClassGrapher\Model\ObjectTable,
-    SixtyNine\ClassGrapher\Model\ClassItem,
-    SixtyNine\ClassGrapher\Model\InterfaceItem;
+use SixtyNine\ClassGrapher\Parser\ClassResolver;
+use SixtyNine\ClassGrapher\Parser\Tokenizer;
+use SixtyNine\ClassGrapher\Parser\Parser;
+use SixtyNine\ClassGrapher\Model\ObjectTable;
+use SixtyNine\ClassGrapher\Model\ClassItem;
+use SixtyNine\ClassGrapher\Model\InterfaceItem;
 
 class ParserTest extends \PHPUnit_Framework_TestCase
 {

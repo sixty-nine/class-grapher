@@ -3,7 +3,6 @@
 namespace SixtyNine\ClassGrapher\Tests\Helper;
 
 use SixtyNine\ClassGrapher\Helper\NamespaceTree;
-use SixtyNine\ClassGrapher\Helper\_Namespace;
 
 class NamespaceTreeTest extends \PHPUnit_Framework_TestCase
 {

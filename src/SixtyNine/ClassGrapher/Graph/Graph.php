@@ -34,6 +34,7 @@ class Graph
      * Add a node to the graph
      * @param $id The unique ID of the node
      * @param $label The label of the node
+     * @param bool $isInterface
      * @return void
      */
     public function addNode($id, $label, $isInterface = false)

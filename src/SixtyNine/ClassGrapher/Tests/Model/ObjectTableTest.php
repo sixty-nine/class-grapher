@@ -2,8 +2,8 @@
 
 namespace SixtyNine\ClassGrapher\Tests\Model;
 
-use SixtyNine\ClassGrapher\Model\ObjectTable,
-    SixtyNine\ClassGrapher\Model\ClassItem;
+use SixtyNine\ClassGrapher\Model\ObjectTable;
+use SixtyNine\ClassGrapher\Model\ClassItem;
 
 class ObjectTableTest extends \PHPUnit_Framework_TestCase
 {

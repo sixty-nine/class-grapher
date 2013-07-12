@@ -44,7 +44,6 @@ class _Namespace {
      *          insert('NS1\\NS2\\NS3', 'NS4', -4)  --> 'NS4\\NS1\\NS2\\NS3'
      *          insert('NS1\\NS2\\NS3', 'NS4', -5)  --> 'NS4\\NS1\\NS2\\NS3'
      *
-     * @param $namespace
      * @param $name
      * @param int $position
      * @return void

@@ -2,13 +2,13 @@
 
 namespace SixtyNine\PhpParse\Tests\Scanner;
 
-use SixtyNine\PhpParse\Scanner\GenericScanner,
-    SixtyNine\PhpParse\Reader\FileReader,
-    SixtyNine\PhpParse\Scanner\Token,
-    SixtyNine\PhpParse\Scanner\GenericToken,
-    SixtyNine\PhpParse\Scanner\TokenQueue,
-    SixtyNine\PhpParse\Scanner\TokenFilter,
-    SixtyNine\PhpParse\Scanner\Context\DefaultScannerContext;
+use SixtyNine\PhpParse\Scanner\GenericScanner;
+use SixtyNine\PhpParse\Reader\FileReader;
+use SixtyNine\PhpParse\Scanner\Token;
+use SixtyNine\PhpParse\Scanner\GenericToken;
+use SixtyNine\PhpParse\Scanner\TokenQueue;
+use SixtyNine\PhpParse\Scanner\TokenFilter;
+use SixtyNine\PhpParse\Scanner\Context\DefaultScannerContext;
 
 class GenericScannerTest extends \PHPUnit_Framework_TestCase
 {
@@ -139,7 +139,7 @@ class GenericScannerTest extends \PHPUnit_Framework_TestCase
     protected function assertTokens($tokens, TokenQueue $queue)
     {
         $queue->reset();
-        
+
         $it = new \ArrayIterator($tokens);
 
         $token = $queue->peek();

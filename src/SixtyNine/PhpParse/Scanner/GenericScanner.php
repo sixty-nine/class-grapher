@@ -2,9 +2,8 @@
 
 namespace SixtyNine\PhpParse\Scanner;
 
-use SixtyNine\PhpParse\Reader\ReaderInterface,
-    SixtyNine\PhpParse\Scanner\Token,
-    SixtyNine\PhpParse\Exception\ScannerException;
+use SixtyNine\PhpParse\Reader\ReaderInterface;
+use SixtyNine\PhpParse\Exception\ScannerException;
 
 /**
  * Generic scanner detecting GenericTokens.

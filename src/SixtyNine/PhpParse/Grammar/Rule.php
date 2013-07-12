@@ -5,7 +5,7 @@ namespace SixtyNine\PhpParse\Grammar;
 class Rule
 {
     /**
-     * @var \SixtyNine\PhpParse\Parser\NonTerminalSymbol
+     * @var \SixtyNine\PhpParse\Grammar\NonTerminalSymbol
      */
     protected $leftHand;
 
@@ -40,7 +40,7 @@ class Rule
     }
 
     /**
-     * @return \SixtyNine\PhpParse\Parser\NonTerminalSymbol|null
+     * @return \SixtyNine\PhpParse\Grammar\NonTerminalSymbol|null
      */
     public function getLeftHand()
     {

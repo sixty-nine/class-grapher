@@ -2,10 +2,10 @@
 
 namespace SixtyNine\PhpParse\Tests\Grammar;
 
-use SixtyNine\PhpParse\Grammar\Grammar,
-    SixtyNine\PhpParse\Grammar\Rule,
-    SixtyNine\PhpParse\Grammar\TerminalSymbol,
-    SixtyNine\PhpParse\Grammar\NonTerminalSymbol;
+use SixtyNine\PhpParse\Grammar\Grammar;
+use SixtyNine\PhpParse\Grammar\Rule;
+use SixtyNine\PhpParse\Grammar\TerminalSymbol;
+use SixtyNine\PhpParse\Grammar\NonTerminalSymbol;
 
 class GraphVizBuilderTest extends \PHPUnit_Framework_TestCase
 {

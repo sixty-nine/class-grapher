@@ -2,9 +2,9 @@
 
 namespace SixtyNine\ClassGrapher\Parser;
 
-use SixtyNine\ClassGrapher\Model\ObjectTable,
-    SixtyNine\ClassGrapher\Model\ClassItem,
-    SixtyNine\ClassGrapher\Model\InterfaceItem;
+use SixtyNine\ClassGrapher\Model\ObjectTable;
+use SixtyNine\ClassGrapher\Model\ClassItem;
+use SixtyNine\ClassGrapher\Model\InterfaceItem;
 
 /**
  * Parse a PHP file through a tokenizer and extract the classes and interfaces information into an object table

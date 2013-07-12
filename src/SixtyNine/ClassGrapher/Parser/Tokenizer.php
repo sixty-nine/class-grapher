@@ -2,8 +2,8 @@
 
 namespace SixtyNine\ClassGrapher\Parser;
 
-use SixtyNine\ClassGrapher\Model,
-    SixtyNine\ClassGrapher\Parser\Token;
+use SixtyNine\ClassGrapher\Model;
+use SixtyNine\ClassGrapher\Parser\Token;
 
 class Tokenizer
 {

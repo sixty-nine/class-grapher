@@ -11,6 +11,7 @@ class GraphRenderer implements GraphRendererInterface
 {
     /**
      * Render the graph as a DOT string
+     * @param Graph $graph
      * @param array $params A dictionary of parameters
      * @return string The DOT representation of the graph
      */

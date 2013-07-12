@@ -2,11 +2,9 @@
 
 namespace SixtyNine\PhpParse\Tests\Grammar;
 
-use SixtyNine\PhpParse\Helper\NodeTypeGenerator,
-    SixtyNine\PhpParse\Reader\FileReader,
-    SixtyNine\PhpParse\Parser\CndParser,
-    SixtyNine\PhpParse\Scanner\GenericScanner,
-    SixtyNine\PhpParse\Scanner\Context;
+use SixtyNine\PhpParse\Helper\NodeTypeGenerator;
+use SixtyNine\PhpParse\Parser\CndParser;
+use SixtyNine\PhpParse\Scanner\Context;
 
 class NodeTypeGeneratorTest extends \PHPUnit_Framework_TestCase
 {

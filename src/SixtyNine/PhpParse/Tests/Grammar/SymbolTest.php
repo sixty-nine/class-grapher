@@ -2,9 +2,9 @@
 
 namespace SixtyNine\PhpParse\Tests\Grammar;
 
-use SixtyNine\PhpParse\Grammar\TerminalSymbol,
-    SixtyNine\PhpParse\Grammar\NonTerminalSymbol,
-    SixtyNine\PhpParse\Scanner\Token;
+use SixtyNine\PhpParse\Grammar\TerminalSymbol;
+use SixtyNine\PhpParse\Grammar\NonTerminalSymbol;
+use SixtyNine\PhpParse\Scanner\Token;
 
 class SymbolTest extends \PHPUnit_Framework_TestCase
 {

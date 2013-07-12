@@ -2,8 +2,8 @@
 
 namespace SixtyNine\PhpParse\Exception;
 
-use SixtyNine\PhpParse\Scanner\TokenQueue,
-    SixtyNine\PhpParse\Scanner\Token As Token;
+use SixtyNine\PhpParse\Scanner\TokenQueue;
+use SixtyNine\PhpParse\Scanner\Token As Token;
 
 class ParserException extends \Exception
 {

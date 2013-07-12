@@ -2,8 +2,6 @@
 
 namespace SixtyNine\PhpParse\Scanner\Context;
 
-use SixtyNine\PhpParse\Scanner\TokenFilter\TokenFilterInterface;
-
 class DefaultScannerContext extends ScannerContext
 {
     public function __construct()

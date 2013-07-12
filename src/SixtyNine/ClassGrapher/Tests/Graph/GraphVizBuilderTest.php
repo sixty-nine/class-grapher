@@ -2,8 +2,8 @@
 
 namespace SixtyNine\ClassGrapher\Tests\Helper;
 
-use SixtyNine\ClassGrapher\Graph\GraphBuilder,
-    SixtyNine\ClassGrapher\Model\ObjectTableBuilder;
+use SixtyNine\ClassGrapher\Graph\GraphBuilder;
+use SixtyNine\ClassGrapher\Model\ObjectTableBuilder;
 use SixtyNine\ClassGrapher\Graph\GraphRenderer;
 
 class GraphVizBuilderTest extends \PHPUnit_Framework_TestCase

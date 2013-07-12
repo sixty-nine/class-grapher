@@ -2,10 +2,10 @@
 
 namespace SixtyNine\PhpParse\Parser;
 
-use SixtyNine\PhpParse\Scanner\GenericToken,
-    SixtyNine\PhpParse\Scanner\TokenQueue,
-    SixtyNine\PhpParse\Exception\ParserException,
-    SixtyNine\PhpParse\Helper\AbstractDebuggable;
+use SixtyNine\PhpParse\Scanner\GenericToken;
+use SixtyNine\PhpParse\Scanner\TokenQueue;
+use SixtyNine\PhpParse\Exception\ParserException;
+use SixtyNine\PhpParse\Helper\AbstractDebuggable;
 
 /**
  * Abstract base class for parsers with debugging capabilities.

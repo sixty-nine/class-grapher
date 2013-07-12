@@ -2,10 +2,10 @@
 
 namespace SixtyNine\PhpParse\Tests\Scanner;
 
-use SixtyNine\PhpParse\Scanner\PhpScanner,
-    SixtyNine\PhpParse\Scanner\Token,
-    SixtyNine\PhpParse\Reader\BufferReader,
-    SixtyNine\PhpParse\Scanner\Context\DefaultScannerContext;
+use SixtyNine\PhpParse\Scanner\PhpScanner;
+use SixtyNine\PhpParse\Scanner\Token;
+use SixtyNine\PhpParse\Reader\BufferReader;
+use SixtyNine\PhpParse\Scanner\Context\DefaultScannerContext;
 
 class PhpParserTest extends \PHPUnit_Framework_TestCase
 {

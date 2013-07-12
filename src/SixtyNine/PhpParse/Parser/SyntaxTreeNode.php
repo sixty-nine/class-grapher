@@ -24,6 +24,7 @@ class SyntaxTreeNode
 
     /**
      * @param string $type
+     * @param array $properties
      */
     public function __construct($type, $properties = array())
     {

@@ -2,8 +2,7 @@
 
 namespace SixtyNine\ClassGrapher\Helper;
 
-use SixtyNine\ClassGrapher\Model,
-    SixtyNine\ClassGrapher\Parser\Tokenizer;
+use SixtyNine\ClassGrapher\Model;
 
 class FileFinder
 {
