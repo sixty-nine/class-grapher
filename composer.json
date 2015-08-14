@@ -1,8 +1,8 @@
 {
     "require": {
-    	"symfony/console": "dev-master",
-        "symfony/filesystem": "dev-master",
-        "symfony/yaml": "dev-master",
+    	"symfony/console": "2.8",
+        "symfony/filesystem": "2.8",
+        "symfony/yaml": "2.8",
         "twig/twig": "1.5.1"
     },
 
