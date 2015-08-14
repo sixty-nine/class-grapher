@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>ClassGrapher by sixty-nine</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>ClassGrapher</h1>
+        <p>Generate a basic class diagram in GraphViz DOT format from PHP files</p>
+
+        <p class="view"><a href="https://github.com/sixty-nine/ClassGrapher">View the Project on GitHub <small>sixty-nine/ClassGrapher</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/sixty-nine/ClassGrapher/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/sixty-nine/ClassGrapher/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/sixty-nine/ClassGrapher">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="class-grapher-" class="anchor" href="#class-grapher-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Class Grapher <a href="http://travis-ci.org/sixty-nine/ClassGrapher"><img src="https://secure.travis-ci.org/sixty-nine/ClassGrapher.png" alt="Build Status"></a>
+</h1>
+
+<p>This code is distributed under the MIT license.</p>
+
+<p>This application will generate a basic class diagram in GraphViz DOT format from
+the PHP files found in the path given as parameter.</p>
+
+<p>The goal of the project is not to get an exact and detailed UML view, but rather
+to provide the programmer with a quick way to figure out how some code is structured.</p>
+
+<p>The grapher does not use PHP reflection so that there is no need to actually instanciate
+the classes that will be shown in the diagram. It means you can graph any set of PHP
+files, even if there are missing dependencies.</p>
+
+<p>The grapher supports namespaced PHP 5.3. However, to reduce the width of the rendered 
+graph, the full namespaces are not shown in the diagram. This can easily be changed in
+the GraphVizBuilder::addNode method.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>This code uses external components that will be installed with composer.</p>
+
+<h4>
+<a id="download-composer" class="anchor" href="#download-composer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download composer</h4>
+
+<p>See <a href="http://packagist.org/">http://packagist.org/</a></p>
+
+<p>You have to put the composer.phar file in the root directory of the project.</p>
+
+<pre><code>cd project_dir # The folder where you have put the ClassGrapher files
+wget http://getcomposer.org/composer.phar
+chmod +x composer.phar
+</code></pre>
+
+<h4>
+<a id="install-the-vendors" class="anchor" href="#install-the-vendors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install the vendors</h4>
+
+<pre><code>./composer.phar install
+</code></pre>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Assumed you have ImageMagick installed you can run the following command to generate
+a class diagram of the class grapher code:</p>
+
+<pre><code>php devtools graph src/ | dot -T png | display
+</code></pre>
+
+<p>You can use the <code>--groups</code> option to group the classes by namespace and the <code>--noedges</code> option to not display relations between the classes.</p>
+
+<h2>
+<a id="running-the-tests" class="anchor" href="#running-the-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running the tests</h2>
+
+<pre><code>phpunit -c tests/
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/sixty-nine">sixty-nine</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-66374011-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
