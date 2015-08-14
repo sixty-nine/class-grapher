@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 use SixtyNine\ClassGrapher\Model\ObjectTableBuilder;
 use SixtyNine\ClassGrapher\Model\ClassItem;
+use SixtyNine\ClassGrapher\Helper\NamespaceHelper;
 use SixtyNine\AutoTest\Helper\Twig;
 
 class DumpObjectTableCommand extends Command
@@ -58,7 +59,7 @@ class DumpObjectTableCommand extends Command
 
             $parents = array_map(function ($value) use ($noNs) {
                 if ($noNs) {
-                    return basename(str_replace('\\', '/', $value));
+                    return NamespaceHelper::getBasename($value);
                 }
                 return $value;
             }, $parents);
