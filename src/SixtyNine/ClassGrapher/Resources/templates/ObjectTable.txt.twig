@@ -1,0 +1,11 @@
+{% for object in table %}
+{{ object.name }}
+{%- if object.parents %}: {{ object.parents }}{% endif %}
+{%- if object.methods %}
+
+{% for method in object.methods %}
+    {{ method }}
+{% endfor %}
+{% endif %}
+
+{% endfor %}
