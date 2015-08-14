@@ -246,7 +246,7 @@ class Parser
     /**
      * Add a class to the object table and resolve its name, parent name and implemented interfaces names
      * @param string $name The name of the class
-     * @param string $extends The extended parent class name
+     * @param array $extends The extended parent class name
      * @param array $implements An array of implemented interfaces names
      * @return void
      */
