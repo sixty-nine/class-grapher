@@ -4,8 +4,8 @@ php:
   - 5.4
 
 before_script:
-  - ./composer sef-update
-  - ./composer install
+  - composer sef-update
+  - composer install
 
 script: phpunit -c tests/
 
