@@ -2,8 +2,8 @@
 
 namespace SixtyNine\ClassGrapher\Model;
 
-interface ItemInterface {
-
+interface ItemInterface
+{
     function getName();
     function setName($name);
     function addMethod($methodName);

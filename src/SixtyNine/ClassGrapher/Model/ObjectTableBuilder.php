@@ -9,6 +9,12 @@ use SixtyNine\ClassGrapher\Parser\Tokenizer;
 
 class ObjectTableBuilder
 {
+    /**
+     * @param $dirName
+     * @param bool $ignoreTests
+     * @return ObjectTable
+     * @throws \InvalidArgumentException
+     */
     public function build($dirName, $ignoreTests = true)
     {
         $ignore = array();
