@@ -50,7 +50,7 @@ interface ReaderInterface
 
     /**
      * Return the literal delimited by start and end position, then set the start position to the end position
-     * @return void
+     * @return string
      */
     public function consume();
 
