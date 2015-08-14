@@ -4,10 +4,8 @@ php:
   - 5.4
 
 before_script:
-  - wget http://getcomposer.org/composer.phar
-  - chmod +x composer.phar
-  - ./composer.phar sef-update
-  - ./composer.phar install
+  - ./composer sef-update
+  - ./composer install
 
 script: phpunit -c tests/
 
