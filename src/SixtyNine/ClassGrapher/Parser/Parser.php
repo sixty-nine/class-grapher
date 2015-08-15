@@ -207,10 +207,10 @@ class Parser
 
     protected function parseFunction()
     {
-        $this->tokenizer->expectToken(T_FUNCTION, false, true);
+        $token = $this->tokenizer->expectToken(T_FUNCTION, false, true);
         $name = $this->parseIdentifier();
         if ($this->currentItem) {
-            $this->currentItem->addMethod($name);
+            $this->currentItem->addMethod($this->tokenizer->getFile(), $token->line, $name);
         }
     }
 

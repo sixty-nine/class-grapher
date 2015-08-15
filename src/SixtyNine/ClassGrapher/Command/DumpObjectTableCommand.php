@@ -17,7 +17,7 @@ class DumpObjectTableCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('dump')
+            ->setName('list')
             ->setDescription('Dump the object table')
             ->setHelp('Generate a list of classes and methods in text format')
             ->addArgument('dir', InputArgument::REQUIRED, '')
@@ -67,6 +67,7 @@ class DumpObjectTableCommand extends Command
 
             $data[$key] = array(
                 'name' => !$noNs ? $className : $definition->getBaseName(),
+                'line' => $definition->getLine(),
                 'parents' => !$noParents ? $parents : null,
             );
 
@@ -74,7 +75,7 @@ class DumpObjectTableCommand extends Command
                 $methods = $definition->getMethods();
 
                 if ($sortMethods) {
-                    asort($methods);
+                    ksort($methods);
                 }
 
                 $data[$key]['methods'] = $methods;

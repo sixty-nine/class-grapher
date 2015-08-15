@@ -2,6 +2,7 @@
 
 namespace SixtyNine\ClassGrapher\Tests\Parser;
 
+use SixtyNine\ClassGrapher\Model\MethodItem;
 use SixtyNine\ClassGrapher\Model\ObjectTableBuilder;
 use SixtyNine\ClassGrapher\Model\ClassItem;
 use SixtyNine\ClassGrapher\Model\InterfaceItem;
@@ -55,7 +56,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $it->count());
         $this->assertEquals(
-            array('myPublicFunction', 'myPublicFunctionWithParams', 'myProtectedFunction', 'myPrivateFunction'),
+            array(
+                'myPublicFunction' => new MethodItem($file, 7, 'myPublicFunction'),
+                'myPublicFunctionWithParams' => new MethodItem($file, 8, 'myPublicFunctionWithParams'),
+                'myProtectedFunction' => new MethodItem($file, 9, 'myProtectedFunction'),
+                'myPrivateFunction' => new MethodItem($file, 10, 'myPrivateFunction'),
+            ),
             $it->current()->getMethods()
         );
     }

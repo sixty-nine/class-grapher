@@ -30,10 +30,10 @@ class InterfaceItem extends AbstractItem
         return $this->extends;
     }
 
-    public function addMethod($methodName)
+    public function addMethod($file, $line, $methodName)
     {
-        if (!in_array($methodName, $this->methods)) {
-            $this->methods[] = $methodName;
+        if (!array_key_exists($methodName, $this->methods)) {
+            $this->methods[$methodName] = new MethodItem($file, $line, $methodName);
         }
     }
 
