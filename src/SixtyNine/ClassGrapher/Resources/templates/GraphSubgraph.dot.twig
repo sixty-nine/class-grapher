@@ -1,13 +1,18 @@
 
-        subgraph {{id}} {
-            label = <<font color="red">{{cluster.data.name}}</font>>
-            labelloc = "b"
+    subgraph {{id}} {
+        label = <
+{%- if (config.baseFont.style b-and 2) == 2 %}<i>{% endif %}
+{% if (config.baseFont.style b-and 1) == 1 %}<b>{% endif -%}
+<font color="{{ config.baseFont.color }}">{{cluster.data.name}}</font>
+{%- if (config.baseFont.style b-and 1) == 1 %}</b>{% endif %}
+{% if (config.baseFont.style b-and 2) == 2 %}</i>{% endif -%}
+        >
+        labelloc = "b"
 
 {% for name, node in cluster.children %}
 {% include "GraphSubgraph.dot.twig" with {'id': name, 'cluster': node} %}
 {% endfor %}
-
 {% for node in cluster.data.nodes %}
-            {{node}}
+        {{node}}
 {% endfor %}
-        }
+    }

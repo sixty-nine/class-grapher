@@ -2,6 +2,8 @@
 
 namespace SixtyNine\ClassGrapher\Command;
 
+use SixtyNine\ClassGrapher\Graph\GraphConfig;
+use SixtyNine\ClassGrapher\Graph\GraphFontConfig;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -36,13 +38,23 @@ class BuildGraphCommand extends Command
         $table = $otBuilder->build($dir);
         $graph = $graphBuilder->build($table);
 
-        $out = $renderer->render(
-            $graph,
-            array(
-                'use-groups' => $input->hasParameterOption('--groups'),
-                'use-edges' => !$input->hasParameterOption('--noedges'),
-            )
-        );
+        $config = new GraphConfig();
+        $config
+            ->getInterfaceFont()
+            ->setColor('grey40')
+            ->setStyle(GraphFontConfig::FONT_ITALIC | GraphFontConfig::FONT_BOLD)
+        ;
+        $config
+            ->getBaseFont()
+            ->setStyle(GraphFontConfig::FONT_BOLD)
+            ->setColor('red')
+        ;
+
+        $config
+            ->setShowGroups($input->hasParameterOption('--groups'))
+            ->setShowEdges(!$input->hasParameterOption('--noedges'));
+
+        $out = $renderer->render($graph, $config);
 
         $output->writeln($out);
     }

@@ -13,9 +13,9 @@ interface GraphRendererInterface
      * Render the graph as a DOT string.
      *
      * @param Graph $graph
-     * @param array $params A dictionary of parameters
+     * @param GraphConfig $config
      *
      * @return string The DOT representation of the graph
      */
-    public function render(Graph $graph, $params = array());
+    public function render(Graph $graph, GraphConfig $config);
 }
