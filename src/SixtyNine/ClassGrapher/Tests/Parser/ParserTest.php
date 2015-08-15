@@ -13,13 +13,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $file = __DIR__ . '/../Fixtures/Classes.php';
         $ns = 'SixtyNine\\ClassGrapher\\Tests\\Fixtures\\';
         $expected = array(
-            new InterfaceItem($file, $ns . 'MyInterface1'),
-            new InterfaceItem($file, $ns . 'MyInterface2', array($ns . 'MyInterface1')),
-            new InterfaceItem($file, $ns . 'MyInterface3', array($ns . 'MyInterface1', $ns . 'MyInterface2')),
-            new ClassItem($file, $ns . 'MyClass1', array('SixtyNine\ClassGrapher\Graph\GraphViz')),
-            new ClassItem($file, $ns . 'MyClass2', array(), array($ns . 'MyInterface1')),
-            new ClassItem($file, $ns . 'MyClass3', array('SixtyNine\ClassGrapher\Graph\GraphViz'), array($ns . 'MyInterface1')),
-            new ClassItem($file, $ns . 'MyClass4', array(), array($ns . 'MyInterface1', $ns . 'MyInterface2')),
+            new InterfaceItem($file, 7, $ns . 'MyInterface1'),
+            new InterfaceItem($file, 8, $ns . 'MyInterface2', array($ns . 'MyInterface1')),
+            new InterfaceItem($file, 9, $ns . 'MyInterface3', array($ns . 'MyInterface1', $ns . 'MyInterface2')),
+            new ClassItem($file, 10, $ns . 'MyClass1', array('SixtyNine\ClassGrapher\Graph\GraphViz')),
+            new ClassItem($file, 11, $ns . 'MyClass2', array(), array($ns . 'MyInterface1')),
+            new ClassItem($file, 12, $ns . 'MyClass3', array('SixtyNine\ClassGrapher\Graph\GraphViz'), array($ns . 'MyInterface1')),
+            new ClassItem($file, 13, $ns . 'MyClass4', array(), array($ns . 'MyInterface1', $ns . 'MyInterface2')),
         );
 
         $builder = new ObjectTableBuilder();

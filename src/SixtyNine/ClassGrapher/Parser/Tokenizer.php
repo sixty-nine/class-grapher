@@ -102,7 +102,7 @@ class Tokenizer
             return new Token(0, $phpToken);
         }
 
-        return new Token($phpToken[0], $phpToken[1]);
+        return new Token($phpToken[0], $phpToken[1], $phpToken[2]);
     }
 
     public function getFile()

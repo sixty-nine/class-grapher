@@ -49,17 +49,17 @@ class ObjectTableBuilder
         return $this->objectTable;
     }
 
-    public function addClass($file, $name, $extends = array(), $implements = array())
+    public function addClass($file, $line, $name, $extends = array(), $implements = array())
     {
-        $item = new ClassItem($file, $name, $extends, $implements);
+        $item = new ClassItem($file, $line, $name, $extends, $implements);
         $this->objectTable->add($item);
 
         return $item;
     }
 
-    public function addInterface($file, $name, $extends = array())
+    public function addInterface($file, $line, $name, $extends = array())
     {
-        $item = new InterfaceItem($file, $name, $extends);
+        $item = new InterfaceItem($file, $line, $name, $extends);
         $this->objectTable->add($item);
 
         return $item;

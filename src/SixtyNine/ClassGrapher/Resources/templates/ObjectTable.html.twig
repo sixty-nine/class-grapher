@@ -1,7 +1,7 @@
 <ul>
 {% for object in table %}
 <li>{{ object.name }}
-{%- if object.parents %}: {{ object.parents }}{% endif %}
+{%- if object.parents %} : {{ object.parents }}{% endif %}
 {% if object.methods %}
 
     <ul>

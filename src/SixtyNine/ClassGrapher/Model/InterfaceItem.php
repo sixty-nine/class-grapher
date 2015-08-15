@@ -2,44 +2,17 @@
 
 namespace SixtyNine\ClassGrapher\Model;
 
-use SixtyNine\ClassGrapher\Helper\NamespaceHelper;
-
-class InterfaceItem implements ItemInterface
+class InterfaceItem extends AbstractItem
 {
-    protected $file;
-
-    protected $name;
-
     protected $extends;
 
     protected $methods;
 
-    public function __construct($file = '', $name = '', $extends = array(), $methods = array())
+    public function __construct($file = '', $line = 0, $name = '', $extends = array(), $methods = array())
     {
-        $this->file = $file;
-        $this->name = $name;
+        parent::__construct($file, $line, $name);
         $this->extends = $extends;
         $this->methods = $methods;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function getBaseName()
-    {
-        return NamespaceHelper::getBasename($this->getName());
-    }
-
-    public function getNamespace()
-    {
-        return NamespaceHelper::getNamespace($this->getName());
     }
 
     public function addExtend($extend)
@@ -72,10 +45,5 @@ class InterfaceItem implements ItemInterface
     public function getType()
     {
         return ItemInterface::TYPE_INTERFACE;
-    }
-
-    public function getFile()
-    {
-        return $this->file;
     }
 }

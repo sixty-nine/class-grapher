@@ -153,7 +153,8 @@ class Parser
         $extends = array();
         $implements = array();
 
-        $this->tokenizer->getToken();
+        $token = $this->tokenizer->getToken();
+        $line = $token->line;
         $name = $this->parseIdentifier();
 
         if ($this->tokenizer->peekToken()->type === T_EXTENDS) {
@@ -175,7 +176,7 @@ class Parser
             }
         }
 
-        $this->addClassToTable($name, $extends, $implements);
+        $this->addClassToTable($name, $extends, $implements, $line);
     }
 
     /**
@@ -184,7 +185,7 @@ class Parser
     protected function parseInterface()
     {
         $extends = array();
-        $this->tokenizer->expectToken(T_INTERFACE, false, true);
+        $token = $this->tokenizer->expectToken(T_INTERFACE, false, true);
         $name = $this->classResolver->resolve($this->parseIdentifier());
 
         if ($this->tokenizer->peekToken()->type === T_EXTENDS) {
@@ -201,7 +202,7 @@ class Parser
             }
         }
 
-        $this->builder->addInterface($this->tokenizer->getFile(), $name, $extends);
+        $this->builder->addInterface($this->tokenizer->getFile(), $token->line, $name, $extends);
     }
 
     protected function parseFunction()
@@ -238,7 +239,7 @@ class Parser
      * @param array  $extends    The extended parent class name
      * @param array  $implements An array of implemented interfaces names
      */
-    protected function addClassToTable($name, $extends, $implements)
+    protected function addClassToTable($name, $extends, $implements, $line)
     {
         $name = $this->curNamespace . '\\' . $name;
         $resolvedExtends = array();
@@ -251,6 +252,6 @@ class Parser
             $resolvedImplements[] = $this->classResolver->resolve($interface);
         }
 
-        $this->currentItem = $this->builder->addClass($this->tokenizer->getFile(), $name, $resolvedExtends, $resolvedImplements);
+        $this->currentItem = $this->builder->addClass($this->tokenizer->getFile(), $line, $name, $resolvedExtends, $resolvedImplements);
     }
 }

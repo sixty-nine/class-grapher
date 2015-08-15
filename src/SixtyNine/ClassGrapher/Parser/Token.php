@@ -8,10 +8,13 @@ class Token
 
     public $data;
 
-    public function __construct($type = 0, $data = '')
+    public $line;
+
+    public function __construct($type = 0, $data = '', $line = 1)
     {
         $this->type = $type;
         $this->data = $data;
+        $this->line = $line;
     }
 
     public function __toString()

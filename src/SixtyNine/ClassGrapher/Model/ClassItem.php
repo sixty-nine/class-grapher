@@ -6,9 +6,9 @@ class ClassItem extends InterfaceItem
 {
     protected $implements;
 
-    public function __construct($file = '', $name = '', $extends = '', $implements = array())
+    public function __construct($file = '', $line = 0, $name = '', $extends = '', $implements = array())
     {
-        parent::__construct($file, $name, $extends);
+        parent::__construct($file, $line, $name, $extends);
         $this->implements = $implements;
     }
 
