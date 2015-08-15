@@ -1,5 +1,7 @@
-Class Grapher [![Build Status](https://secure.travis-ci.org/sixty-nine/ClassGrapher.png)](http://travis-ci.org/sixty-nine/ClassGrapher) [![Code Climate](https://codeclimate.com/github/sixty-nine/ClassGrapher/badges/gpa.svg)](https://codeclimate.com/github/sixty-nine/ClassGrapher) [![Dependency Status](https://gemnasium.com/sixty-nine/ClassGrapher.svg)](https://gemnasium.com/sixty-nine/ClassGrapher)
+Class Grapher
 =============
+
+[![Build Status](https://secure.travis-ci.org/sixty-nine/ClassGrapher.png)](http://travis-ci.org/sixty-nine/ClassGrapher) [![Code Climate](https://codeclimate.com/github/sixty-nine/ClassGrapher/badges/gpa.svg)](https://codeclimate.com/github/sixty-nine/ClassGrapher) [![Dependency Status](https://gemnasium.com/sixty-nine/ClassGrapher.svg)](https://gemnasium.com/sixty-nine/ClassGrapher)
 
 This code is distributed under the MIT license.
 
