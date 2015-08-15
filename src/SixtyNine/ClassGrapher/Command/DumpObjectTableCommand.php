@@ -17,7 +17,7 @@ class DumpObjectTableCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('list')
+            ->setName('dump')
             ->setDescription('Dump the object table')
             ->setHelp('Generate a list of classes and methods in text format')
             ->addArgument('dir', InputArgument::REQUIRED, '')
