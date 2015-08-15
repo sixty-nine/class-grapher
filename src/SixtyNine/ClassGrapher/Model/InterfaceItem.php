@@ -6,14 +6,17 @@ use SixtyNine\ClassGrapher\Helper\NamespaceHelper;
 
 class InterfaceItem implements ItemInterface
 {
+    protected $file;
+
     protected $name;
 
     protected $extends;
 
     protected $methods;
 
-    public function __construct($name = '', $extends = array(), $methods = array())
+    public function __construct($file = '', $name = '', $extends = array(), $methods = array())
     {
+        $this->file = $file;
         $this->name = $name;
         $this->extends = $extends;
         $this->methods = $methods;
@@ -64,5 +67,15 @@ class InterfaceItem implements ItemInterface
     public function getMethods()
     {
         return $this->methods;
+    }
+
+    public function getType()
+    {
+        return ItemInterface::TYPE_INTERFACE;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
     }
 }

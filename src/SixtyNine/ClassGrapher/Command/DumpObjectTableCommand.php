@@ -2,6 +2,7 @@
 
 namespace SixtyNine\ClassGrapher\Command;
 
+use SixtyNine\ClassGrapher\Model\ItemInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -55,7 +56,7 @@ class DumpObjectTableCommand extends Command
         foreach ($table as $className => $definition) {
 
             $parents = $definition->getExtends();
-            $parents = array_merge($parents, $definition instanceof ClassItem ? $definition->getImplements() : array());
+            $parents = array_merge($parents, $definition->getType() === ItemInterface::TYPE_CLASS ? $definition->getImplements() : array());
 
             if ($noNs) {
                 $parents = array_map(function ($value) {

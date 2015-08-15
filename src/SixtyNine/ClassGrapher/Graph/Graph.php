@@ -17,7 +17,7 @@ class Graph
     /** @var array */
     protected $edges;
 
-    /** @var SimpleTree */
+    /** @var SimpleDictionary */
     protected $groups;
 
     /**
@@ -32,8 +32,8 @@ class Graph
 
     /**
      * Add a node to the graph
-     * @param $id The unique ID of the node
-     * @param $label The label of the node
+     * @param string $id The unique ID of the node
+     * @param string $label The label of the node
      * @param bool $isInterface
      * @return void
      */
@@ -47,8 +47,8 @@ class Graph
     /**
      * Add a edge parent --> child in the graph
      * @throws \InvalidArgumentException
-     * @param $parent The source node of the edge
-     * @param $child The destination node of the edge
+     * @param string $parent The source node of the edge
+     * @param string $child The destination node of the edge
      * @return void
      */
     public function addEdge($parent, $child)

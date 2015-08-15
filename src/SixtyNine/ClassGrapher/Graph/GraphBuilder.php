@@ -2,8 +2,9 @@
 
 namespace SixtyNine\ClassGrapher\Graph;
 
-use SixtyNine\ClassGrapher\Model\ObjectTable;
 use SixtyNine\ClassGrapher\Model\ClassItem;
+use SixtyNine\ClassGrapher\Model\ItemInterface;
+use SixtyNine\ClassGrapher\Model\ObjectTable;
 use SixtyNine\ClassGrapher\Helper\NamespaceHelper;
 use SixtyNine\ClassGrapher\Helper\NamespaceTreeItem;
 use SixtyNine\ClassGrapher\Helper\NamespaceTree;
@@ -30,9 +31,7 @@ class GraphBuilder
     /** @var int */
     protected $clusterCounter;
 
-    /**
-     * @var \SixtyNine\ClassGrapher\Model\ObjectTable
-     */
+    /** @var Graph */
     protected $graph;
 
     /**
@@ -48,11 +47,12 @@ class GraphBuilder
         $this->graph = new Graph();
         $nsTree = new NamespaceTree();
 
+        /** @var ClassItem $item */
         foreach($table as $item)
         {
             $nodeHash = md5($item->getName());
 
-            if ($item instanceof ClassItem) {
+            if ($item->getType() === ItemInterface::TYPE_CLASS) {
 
                 $this->addNode($item->getName());
 
@@ -105,7 +105,7 @@ class GraphBuilder
 
     /**
      * Add a node to the graph if it does not already exist
-     * @param $name The name of the node
+     * @param string $name The name of the node
      * @param bool $interface True if interfaces style must be applied to the node
      * @return void
      */

@@ -2,7 +2,8 @@
 
 namespace SixtyNine\ClassGrapher\Helper;
 
-class _Namespace {
+class _Namespace
+{
 
     protected $parts = array();
 
@@ -46,7 +47,7 @@ class _Namespace {
      *
      * @param $name
      * @param int $position
-     * @return void
+     * @return _Namespace
      */
     public function insert($name, $position = 0)
     {
@@ -128,7 +129,6 @@ class _Namespace {
         $name .= $rest;
 
         return $name;
-        return $baseDir . '/' . implode('/', $this->parts);
     }
 
     public function __toString()

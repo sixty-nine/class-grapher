@@ -49,7 +49,7 @@ class NamespaceHelper {
      * @param $namespace
      * @param $name
      * @param int $position
-     * @return void
+     * @return string
      */
     public static function insertNamespace($namespace, $name, $position = 0)
     {

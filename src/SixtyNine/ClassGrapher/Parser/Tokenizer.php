@@ -3,7 +3,6 @@
 namespace SixtyNine\ClassGrapher\Parser;
 
 use SixtyNine\ClassGrapher\Model;
-use SixtyNine\ClassGrapher\Parser\Token;
 
 class Tokenizer
 {
@@ -111,4 +110,8 @@ class Tokenizer
         return new Token($phpToken[0], $phpToken[1]);
     }
 
+    public function getFile()
+    {
+        return $this->fileName;
+    }
 }

@@ -2,7 +2,8 @@
 
 namespace SixtyNine\ClassGrapher\Helper;
 
-class SimpleDictionary {
+class SimpleDictionary
+{
 
     protected $data;
 
@@ -51,6 +52,7 @@ class SimpleDictionary {
 
     public function find($key)
     {
+        /** @var SimpleDictionary $child */
         foreach ($this->children as $name => $child) {
             if ($key === $name) {
                 return $child;
@@ -66,6 +68,7 @@ class SimpleDictionary {
     public function traverse(callable $callback, $parentKey = '')
     {
         $callback($this, $parentKey);
+        /** @var SimpleDictionary $child */
         foreach ($this->children as $key => $child) {
             $child->traverse($callback, $key);
         }

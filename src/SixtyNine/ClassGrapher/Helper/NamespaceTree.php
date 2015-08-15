@@ -2,8 +2,10 @@
 
 namespace SixtyNine\ClassGrapher\Helper;
 
-class NamespaceTree {
+class NamespaceTree
+{
 
+    /** @var \SixtyNine\ClassGrapher\Helper\NamespaceTreeItem */
     protected $tree;
 
     public function __construct()
@@ -67,6 +69,11 @@ class NamespaceTree {
 
     }
 
+    /**
+     * @param \SixtyNine\ClassGrapher\Helper\NamespaceTreeItem $curPart
+     * @param array $parts
+     * @return mixed
+     */
     protected function addParts($curPart, $parts = array())
     {
         if ($part = array_shift($parts)) {

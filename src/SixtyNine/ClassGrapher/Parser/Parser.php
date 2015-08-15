@@ -2,9 +2,7 @@
 
 namespace SixtyNine\ClassGrapher\Parser;
 
-use SixtyNine\ClassGrapher\Model\ObjectTable;
-use SixtyNine\ClassGrapher\Model\ClassItem;
-use SixtyNine\ClassGrapher\Model\InterfaceItem;
+use SixtyNine\ClassGrapher\Model\ObjectTableBuilder;
 
 /**
  * Parse a PHP file through a tokenizer and extract the classes and interfaces information into an object table
@@ -25,9 +23,9 @@ class Parser
     protected $classResolver;
 
     /**
-     * @var \SixtyNine\ClassGrapher\Model\ObjectTable
+     * @var \SixtyNine\ClassGrapher\Model\ObjectTableBuilder
      */
-    protected $objectTable;
+    protected $builder;
 
     /**
      * @var \SixtyNine\ClassGrapher\Parser\Tokenizer
@@ -45,11 +43,11 @@ class Parser
      * @param ClassResolver $classResolver
      * @param \SixtyNine\ClassGrapher\Model\ObjectTable $objectTable
      */
-    public function __construct(Tokenizer $tokenizer, ClassResolver $classResolver, ObjectTable $objectTable)
+    public function __construct(Tokenizer $tokenizer, ClassResolver $classResolver, ObjectTableBuilder $builder)
     {
         $this->tokenizer = $tokenizer;
         $this->classResolver = $classResolver;
-        $this->objectTable = $objectTable;
+        $this->builder = $builder;
         $this->curNamespace = '';
 
         $classResolver->resetAliases();
@@ -214,7 +212,7 @@ class Parser
 
         }
 
-        $this->objectTable->add(new InterfaceItem($name, $extends));
+        $this->builder->addInterface($this->tokenizer->getFile(), $name, $extends);
     }
 
     protected function parseFunction()
@@ -263,8 +261,6 @@ class Parser
             $resolvedImplements[] = $this->classResolver->resolve($interface);
         }
 
-        $item = new ClassItem($name, $resolvedExtends, $resolvedImplements);
-        $this->currentItem = $item;
-        $this->objectTable->add($item);
+        $this->currentItem = $this->builder->addClass($this->tokenizer->getFile(), $name, $resolvedExtends, $resolvedImplements);
     }
 }

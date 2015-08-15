@@ -10,6 +10,11 @@ use SixtyNine\ClassGrapher\Parser\Tokenizer;
 class ObjectTableBuilder
 {
     /**
+     * @var \SixtyNine\ClassGrapher\Model\ObjectTable
+     */
+    protected $objectTable;
+
+    /**
      * @param $dirName
      * @param bool $ignoreTests
      * @return ObjectTable
@@ -22,7 +27,7 @@ class ObjectTableBuilder
             $ignore[] = 'Tests';
         }
 
-        $objectTable = new ObjectTable();
+        $this->objectTable = new ObjectTable();
         $classResolver = new ClassResolver();
 
         if (is_dir($dirName)) {
@@ -35,11 +40,25 @@ class ObjectTableBuilder
         }
 
         foreach ($files as $file) {
-            $parser = new Parser(new Tokenizer($file), $classResolver, $objectTable);
+            $parser = new Parser(new Tokenizer($file), $classResolver, $this);
             $parser->parse();
         }
 
-        return $objectTable;
+        return $this->objectTable;
+    }
+
+    public function addClass($file, $name, $extends = array(), $implements = array())
+    {
+        $item = new ClassItem($file, $name, $extends, $implements);
+        $this->objectTable->add($item);
+        return $item;
+    }
+
+    public function addInterface($file, $name, $extends = array())
+    {
+        $item = new InterfaceItem($file, $name, $extends);
+        $this->objectTable->add($item);
+        return $item;
     }
 
 }

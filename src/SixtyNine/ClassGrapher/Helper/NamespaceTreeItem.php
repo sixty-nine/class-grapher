@@ -2,7 +2,8 @@
 
 namespace SixtyNine\ClassGrapher\Helper;
 
-class NamespaceTreeItem {
+class NamespaceTreeItem
+{
 
     public $data = array();
     public $children = array();

@@ -2,10 +2,7 @@
 
 namespace SixtyNine\ClassGrapher\Tests\Parser;
 
-use SixtyNine\ClassGrapher\Parser\ClassResolver;
-use SixtyNine\ClassGrapher\Parser\Tokenizer;
-use SixtyNine\ClassGrapher\Parser\Parser;
-use SixtyNine\ClassGrapher\Model\ObjectTable;
+use SixtyNine\ClassGrapher\Model\ObjectTableBuilder;
 use SixtyNine\ClassGrapher\Model\ClassItem;
 use SixtyNine\ClassGrapher\Model\InterfaceItem;
 
@@ -13,22 +10,20 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 {
     public function testParse()
     {
+        $file = __DIR__ . '/../Fixtures/Classes.php';
         $ns = 'SixtyNine\\ClassGrapher\\Tests\\Fixtures\\';
         $expected = array(
-            new InterfaceItem($ns . 'MyInterface1'),
-            new InterfaceItem($ns . 'MyInterface2', array($ns . 'MyInterface1')),
-            new InterfaceItem($ns . 'MyInterface3', array($ns . 'MyInterface1', $ns . 'MyInterface2')),
-            new ClassItem($ns . 'MyClass1', array('SixtyNine\ClassGrapher\Graph\GraphViz')),
-            new ClassItem($ns . 'MyClass2', array(), array($ns . 'MyInterface1')),
-            new ClassItem($ns . 'MyClass3', array('SixtyNine\ClassGrapher\Graph\GraphViz'), array($ns . 'MyInterface1')),
-            new ClassItem($ns . 'MyClass4', array(), array($ns . 'MyInterface1', $ns . 'MyInterface2')),
+            new InterfaceItem($file, $ns . 'MyInterface1'),
+            new InterfaceItem($file, $ns . 'MyInterface2', array($ns . 'MyInterface1')),
+            new InterfaceItem($file, $ns . 'MyInterface3', array($ns . 'MyInterface1', $ns . 'MyInterface2')),
+            new ClassItem($file, $ns . 'MyClass1', array('SixtyNine\ClassGrapher\Graph\GraphViz')),
+            new ClassItem($file, $ns . 'MyClass2', array(), array($ns . 'MyInterface1')),
+            new ClassItem($file, $ns . 'MyClass3', array('SixtyNine\ClassGrapher\Graph\GraphViz'), array($ns . 'MyInterface1')),
+            new ClassItem($file, $ns . 'MyClass4', array(), array($ns . 'MyInterface1', $ns . 'MyInterface2')),
         );
 
-        $ot = new ObjectTable();
-        $resolver = new ClassResolver();
-        $tokenizer = new Tokenizer(__DIR__ . '/../Fixtures/Classes.php');
-        $parser = new Parser($tokenizer, $resolver, $ot);
-        $parser->parse();
+        $builder = new ObjectTableBuilder();
+        $ot = $builder->build($file);
 
         $it = $ot->getIterator();
 
@@ -45,13 +40,10 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     public function testParseFunctions()
     {
         $ns = 'SixtyNine\\ClassGrapher\\Tests\\Fixtures\\';
+        $file = __DIR__ . '/../Fixtures/Methods.php';
 
-        $ot = new ObjectTable();
-        $resolver = new ClassResolver();
-        $tokenizer = new Tokenizer(__DIR__ . '/../Fixtures/Methods.php');
-        $parser = new Parser($tokenizer, $resolver, $ot);
-        $parser->parse();
-
+        $builder = new ObjectTableBuilder();
+        $ot = $builder->build($file);
         $it = $ot->getIterator();
 
         $this->assertEquals(1, $it->count());
