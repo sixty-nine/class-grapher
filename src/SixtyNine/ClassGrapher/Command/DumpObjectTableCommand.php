@@ -30,7 +30,7 @@ class DumpObjectTableCommand extends Command
             ->addOption('no-parents', null, InputOption::VALUE_NONE, 'Don\'t show classes parents')
             ->addOption('no-ns', null, InputOption::VALUE_NONE, 'Don\'t show namespaces')
             ->addOption('classes', null, InputOption::VALUE_NONE, 'Preset: Show class names (--no-methods, --no-parents)')
-            ->addOption('short-classes', null, InputOption::VALUE_NONE, 'Preset: Show class names without namespaces (--no-methods, --no-parents, --no-ns)')
+            ->addOption('short', null, InputOption::VALUE_NONE, 'Preset: Show class names without namespaces (--no-methods, --no-parents, --no-ns, --sort-classes)')
             ->addOption('inherit', null, InputOption::VALUE_NONE, 'Preset: Show inheritance (--no-methods)')
         ;
     }
@@ -38,12 +38,12 @@ class DumpObjectTableCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $dir = $input->getArgument('dir');
-        $sortClasses = (bool)$input->getOption('sort-classes');
+        $sortClasses = $input->getOption('short') || (bool)$input->getOption('sort-classes');
         $sortNs = (bool)$input->getOption('sort-ns');
         $sortMethods = $input->getOption('sort-methods');
-        $noMethods = $input->getOption('classes') || $input->getOption('inherit') || $input->getOption('short-classes') || $input->getOption('no-methods');
-        $noParents = $input->getOption('classes') || $input->getOption('short-classes') || $input->getOption('no-parents');
-        $noNs = $input->getOption('short-classes') || $input->getOption('no-ns');
+        $noMethods = $input->getOption('classes') || $input->getOption('inherit') || $input->getOption('short') || $input->getOption('no-methods');
+        $noParents = $input->getOption('classes') || $input->getOption('short') || $input->getOption('no-parents');
+        $noNs = $input->getOption('short') || $input->getOption('no-ns');
         $html = $input->getOption('html');
 
         $otBuilder = new ObjectTableBuilder();
@@ -57,12 +57,11 @@ class DumpObjectTableCommand extends Command
             $parents = $definition->getExtends();
             $parents = array_merge($parents, $definition instanceof ClassItem ? $definition->getImplements() : array());
 
-            $parents = array_map(function ($value) use ($noNs) {
-                if ($noNs) {
+            if ($noNs) {
+                $parents = array_map(function ($value) {
                     return NamespaceHelper::getBasename($value);
-                }
-                return $value;
-            }, $parents);
+                }, $parents);
+            }
 
             $parents = implode(', ', $parents);
 
