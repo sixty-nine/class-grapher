@@ -16,7 +16,7 @@ class NamespaceHelperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for GetNamespace
+     * Test for GetNamespace.
      */
     public function testGetNamespace()
     {
@@ -29,7 +29,7 @@ class NamespaceHelperTest extends \PHPUnit_Framework_TestCase
     public function testInsertNamespace()
     {
         $this->assertEquals('NS4\\NS1\\NS2\\NS3', NamespaceHelper::insertNamespace('NS1\\NS2\\NS3', 'NS4'));
-        
+
         $this->assertEquals('NS1\\NS4\\NS2\\NS3', NamespaceHelper::insertNamespace('NS1\\NS2\\NS3', 'NS4', 1));
         $this->assertEquals('NS1\\NS2\\NS4\\NS3', NamespaceHelper::insertNamespace('NS1\\NS2\\NS3', 'NS4', 2));
         $this->assertEquals('NS1\\NS2\\NS3\\NS4', NamespaceHelper::insertNamespace('NS1\\NS2\\NS3', 'NS4', 3));

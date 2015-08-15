@@ -8,9 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-
 use SixtyNine\ClassGrapher\Model\ObjectTableBuilder;
-use SixtyNine\ClassGrapher\Model\ClassItem;
 use SixtyNine\ClassGrapher\Helper\NamespaceHelper;
 use SixtyNine\AutoTest\Helper\Twig;
 
@@ -39,8 +37,8 @@ class DumpObjectTableCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $dir = $input->getArgument('dir');
-        $sortClasses = $input->getOption('short') || (bool)$input->getOption('sort-classes');
-        $sortNs = (bool)$input->getOption('sort-ns');
+        $sortClasses = $input->getOption('short') || (bool) $input->getOption('sort-classes');
+        $sortNs = (bool) $input->getOption('sort-ns');
         $sortMethods = $input->getOption('sort-methods');
         $noMethods = $input->getOption('classes') || $input->getOption('inherit') || $input->getOption('short') || $input->getOption('no-methods');
         $noParents = $input->getOption('classes') || $input->getOption('short') || $input->getOption('no-parents');
@@ -54,7 +52,6 @@ class DumpObjectTableCommand extends Command
 
         /** @var \SixtyNine\ClassGrapher\Model\ClassItem $definition */
         foreach ($table as $className => $definition) {
-
             $parents = $definition->getExtends();
             $parents = array_merge($parents, $definition->getType() === ItemInterface::TYPE_CLASS ? $definition->getImplements() : array());
 
@@ -98,5 +95,4 @@ class DumpObjectTableCommand extends Command
 
         $output->writeln($out);
     }
-
 }

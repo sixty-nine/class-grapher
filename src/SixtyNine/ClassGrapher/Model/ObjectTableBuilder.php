@@ -17,7 +17,9 @@ class ObjectTableBuilder
     /**
      * @param $dirName
      * @param bool $ignoreTests
+     *
      * @return ObjectTable
+     *
      * @throws \InvalidArgumentException
      */
     public function build($dirName, $ignoreTests = true)
@@ -51,6 +53,7 @@ class ObjectTableBuilder
     {
         $item = new ClassItem($file, $name, $extends, $implements);
         $this->objectTable->add($item);
+
         return $item;
     }
 
@@ -58,7 +61,7 @@ class ObjectTableBuilder
     {
         $item = new InterfaceItem($file, $name, $extends);
         $this->objectTable->add($item);
+
         return $item;
     }
-
 }

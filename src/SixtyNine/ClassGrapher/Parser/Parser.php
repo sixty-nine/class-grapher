@@ -5,14 +5,15 @@ namespace SixtyNine\ClassGrapher\Parser;
 use SixtyNine\ClassGrapher\Model\ObjectTableBuilder;
 
 /**
- * Parse a PHP file through a tokenizer and extract the classes and interfaces information into an object table
+ * Parse a PHP file through a tokenizer and extract the classes and interfaces information into an object table.
  *
  * @author D. Barsotti <sixtynine.db@gmail.com>
  */
 class Parser
 {
     /**
-     * The current namespace with a trailing backslash
+     * The current namespace with a trailing backslash.
+     *
      * @var string
      */
     protected $curNamespace;
@@ -38,9 +39,10 @@ class Parser
     protected $currentItem;
 
     /**
-     * Constructor
-     * @param Tokenizer $tokenizer
-     * @param ClassResolver $classResolver
+     * Constructor.
+     *
+     * @param Tokenizer                                 $tokenizer
+     * @param ClassResolver                             $classResolver
      * @param \SixtyNine\ClassGrapher\Model\ObjectTable $objectTable
      */
     public function __construct(Tokenizer $tokenizer, ClassResolver $classResolver, ObjectTableBuilder $builder)
@@ -54,13 +56,11 @@ class Parser
     }
 
     /**
-     * Parse the tokens from the tokenizer
-     * @return void
+     * Parse the tokens from the tokenizer.
      */
     public function parse()
     {
         while (!$this->tokenizer->isEof()) {
-
             if ($token = $this->tokenizer->peekToken()) {
 
                 //var_dump(sprintf('%s[%s]', token_name($token->type), $token->data));
@@ -90,19 +90,17 @@ class Parser
     }
 
     /**
-     * Parse a "use" statement and update the class resolver
-     * @return void
+     * Parse a "use" statement and update the class resolver.
      */
     protected function parseUse()
     {
         $this->tokenizer->expectToken(T_USE, false, true);
 
         while (true) {
-
             $alias = '';
             $fqn = $this->parseIdentifier();
 
-            /**
+            /*
              * TODO: There is a problem here: when an alias is set, its scope is the current file
              * only. Otherwise the alias may mask another class namespace.
              *
@@ -134,13 +132,11 @@ class Parser
             } else {
                 break;
             }
-
         }
     }
 
     /**
-     * Parse a "namespace" statement and update the current namespace
-     * @return void
+     * Parse a "namespace" statement and update the current namespace.
      */
     protected function parseNamespace()
     {
@@ -150,25 +146,22 @@ class Parser
     }
 
     /**
-     * Parse a "class" statement
-     * @return void
+     * Parse a "class" statement.
      */
     protected function parseClass()
     {
         $extends = array();
         $implements = array();
-        
+
         $this->tokenizer->getToken();
         $name = $this->parseIdentifier();
 
         if ($this->tokenizer->peekToken()->type === T_EXTENDS) {
-
             $this->tokenizer->expectToken(T_EXTENDS, false, true);
             $extends = array($this->parseIdentifier());
         }
 
         if ($this->tokenizer->peekToken()->type === T_IMPLEMENTS) {
-
             $this->tokenizer->expectToken(T_IMPLEMENTS, false, true);
 
             while (true) {
@@ -186,8 +179,7 @@ class Parser
     }
 
     /**
-     * Parse an "interface" statement
-     * @return void
+     * Parse an "interface" statement.
      */
     protected function parseInterface()
     {
@@ -196,11 +188,9 @@ class Parser
         $name = $this->classResolver->resolve($this->parseIdentifier());
 
         if ($this->tokenizer->peekToken()->type === T_EXTENDS) {
-
             $this->tokenizer->expectToken(T_EXTENDS, false, true);
 
             while (true) {
-
                 $extends[] = $this->classResolver->resolve($this->parseIdentifier());
 
                 if ($this->tokenizer->peekToken()->data === ',') {
@@ -209,7 +199,6 @@ class Parser
                     break;
                 }
             }
-
         }
 
         $this->builder->addInterface($this->tokenizer->getFile(), $name, $extends);
@@ -225,7 +214,8 @@ class Parser
     }
 
     /**
-     * Parse a PHP fully qualified class name in the form: ns1\ns2\...\nsn\class
+     * Parse a PHP fully qualified class name in the form: ns1\ns2\...\nsn\class.
+     *
      * @return string The FQN or empty if none was found
      */
     protected function parseIdentifier()
@@ -242,22 +232,22 @@ class Parser
     }
 
     /**
-     * Add a class to the object table and resolve its name, parent name and implemented interfaces names
-     * @param string $name The name of the class
-     * @param array $extends The extended parent class name
-     * @param array $implements An array of implemented interfaces names
-     * @return void
+     * Add a class to the object table and resolve its name, parent name and implemented interfaces names.
+     *
+     * @param string $name       The name of the class
+     * @param array  $extends    The extended parent class name
+     * @param array  $implements An array of implemented interfaces names
      */
     protected function addClassToTable($name, $extends, $implements)
     {
         $name = $this->curNamespace . '\\' . $name;
         $resolvedExtends = array();
-        foreach($extends as $extend) {
+        foreach ($extends as $extend) {
             $resolvedExtends[] = $this->classResolver->resolve($extend);
         }
 
         $resolvedImplements = array();
-        foreach($implements as $interface) {
+        foreach ($implements as $interface) {
             $resolvedImplements[] = $this->classResolver->resolve($interface);
         }
 

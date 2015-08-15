@@ -28,13 +28,20 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $it = $ot->getIterator();
 
         $this->assertEquals(7, $it->count());
-        $this->assertEquals($expected[0], $it->current()); $it->next();
-        $this->assertEquals($expected[1], $it->current()); $it->next();
-        $this->assertEquals($expected[2], $it->current()); $it->next();
-        $this->assertEquals($expected[3], $it->current()); $it->next();
-        $this->assertEquals($expected[4], $it->current()); $it->next();
-        $this->assertEquals($expected[5], $it->current()); $it->next();
-        $this->assertEquals($expected[6], $it->current()); $it->next();
+        $this->assertEquals($expected[0], $it->current());
+        $it->next();
+        $this->assertEquals($expected[1], $it->current());
+        $it->next();
+        $this->assertEquals($expected[2], $it->current());
+        $it->next();
+        $this->assertEquals($expected[3], $it->current());
+        $it->next();
+        $this->assertEquals($expected[4], $it->current());
+        $it->next();
+        $this->assertEquals($expected[5], $it->current());
+        $it->next();
+        $this->assertEquals($expected[6], $it->current());
+        $it->next();
     }
 
     public function testParseFunctions()
@@ -48,7 +55,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $it->count());
         $this->assertEquals(
-            array("myPublicFunction", "myPublicFunctionWithParams", "myProtectedFunction", "myPrivateFunction"),
+            array('myPublicFunction', 'myPublicFunctionWithParams', 'myProtectedFunction', 'myPrivateFunction'),
             $it->current()->getMethods()
         );
     }

@@ -4,12 +4,12 @@ namespace SixtyNine\ClassGrapher\Tests\Helper;
 
 use SixtyNine\ClassGrapher\Helper\FileFinder;
 
-class PhpParserTest extends \PHPUnit_Framework_TestCase
+class FileFinderTest extends \PHPUnit_Framework_TestCase
 {
     public function testFind()
     {
         $dir = realpath(__DIR__ . '/../Fixtures/files');
-        
+
         $expected1 = array(
             $dir . '/File1.php',
             $dir . '/File2.php',
@@ -17,7 +17,7 @@ class PhpParserTest extends \PHPUnit_Framework_TestCase
             $dir . '/File4.php',
             $dir . '/File5.php',
         );
-        $expected2  = array(
+        $expected2 = array(
             $dir . '/subdir/File1.php',
             $dir . '/subdir/File2.php',
         );

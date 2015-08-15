@@ -5,7 +5,7 @@ namespace SixtyNine\ClassGrapher\Graph;
 use SixtyNine\ClassGrapher\Helper\SimpleDictionary;
 
 /**
- * Generate simple GraphViz graphs
+ * Generate simple GraphViz graphs.
  *
  * @author D. Barsotti <sixtynine.db@gmail.com>
  */
@@ -21,7 +21,7 @@ class Graph
     protected $groups;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -31,11 +31,11 @@ class Graph
     }
 
     /**
-     * Add a node to the graph
-     * @param string $id The unique ID of the node
-     * @param string $label The label of the node
-     * @param bool $isInterface
-     * @return void
+     * Add a node to the graph.
+     *
+     * @param string $id          The unique ID of the node
+     * @param string $label       The label of the node
+     * @param bool   $isInterface
      */
     public function addNode($id, $label, $isInterface = false)
     {
@@ -45,11 +45,12 @@ class Graph
     }
 
     /**
-     * Add a edge parent --> child in the graph
+     * Add a edge parent --> child in the graph.
+     *
      * @throws \InvalidArgumentException
+     *
      * @param string $parent The source node of the edge
-     * @param string $child The destination node of the edge
-     * @return void
+     * @param string $child  The destination node of the edge
      */
     public function addEdge($parent, $child)
     {
@@ -67,11 +68,8 @@ class Graph
     public function addGroup($groupName, $name, $nodes, $parentName = '')
     {
         if ($parentName === '') {
-
             $parent = $this->groups;
-
         } else {
-
             $parent = $this->groups->find($parentName);
 
             if (!$parent) {

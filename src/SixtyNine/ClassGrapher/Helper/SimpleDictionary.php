@@ -4,7 +4,6 @@ namespace SixtyNine\ClassGrapher\Helper;
 
 class SimpleDictionary
 {
-
     protected $data;
 
     protected $children;
@@ -62,6 +61,7 @@ class SimpleDictionary
                 return $res;
             }
         }
+
         return false;
     }
 

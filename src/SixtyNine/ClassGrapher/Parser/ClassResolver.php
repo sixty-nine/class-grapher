@@ -5,7 +5,7 @@ namespace SixtyNine\ClassGrapher\Parser;
 use SixtyNine\ClassGrapher\Helper\NamespaceHelper;
 
 /**
- * Resolve class names to fully qualified class names
+ * Resolve class names to fully qualified class names.
  *
  * @author D. Barsotti <sixtynine.db@gmail.com>
  */
@@ -24,7 +24,7 @@ class ClassResolver
     protected $curNamespace;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -35,9 +35,9 @@ class ClassResolver
 
     /**
      * Add a PHP use to the class resolver. If alias is empty then the last part of the fqn is used as alias.
-     * @param string $fqn Full qualified name of the used item
+     *
+     * @param string $fqn   Full qualified name of the used item
      * @param string $alias The alias to associate the use to. If empty, the last part of $fqn is used
-     * @return void
      */
     public function addUse($fqn, $alias = '')
     {
@@ -60,9 +60,9 @@ class ClassResolver
     }
 
     /**
-     * Set the current namespace that will be used to resolve classes without namespace
+     * Set the current namespace that will be used to resolve classes without namespace.
+     *
      * @param string $namespace The current namespace
-     * @return void
      */
     public function setNamespace($namespace)
     {
@@ -71,8 +71,10 @@ class ClassResolver
 
     /**
      * Resolve a class name to a fully qualified class name in regards to the current namespace
-     * and the actual use statements
+     * and the actual use statements.
+     *
      * @param string $name The class name to resolve
+     *
      * @return string The fully qualified class name
      */
     public function resolve($name)
@@ -86,6 +88,7 @@ class ClassResolver
             if ($pos !== false) {
                 return $this->use[$search] . substr($name, $pos);
             }
+
             return $this->use[$name];
         }
 
@@ -93,6 +96,7 @@ class ClassResolver
             if ($pos !== false) {
                 return $this->aliases[$search] . substr($name, $pos);
             }
+
             return $this->aliases[$name];
         }
 
@@ -102,5 +106,4 @@ class ClassResolver
 
         return $this->curNamespace . '\\' . $name;
     }
-
 }

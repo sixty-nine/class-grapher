@@ -16,6 +16,6 @@ class Token
 
     public function __toString()
     {
-        return sprintf("Token(%s, %s)", token_name($this->type), $this->data);
+        return sprintf('Token(%s, %s)', token_name($this->type), $this->data);
     }
 }

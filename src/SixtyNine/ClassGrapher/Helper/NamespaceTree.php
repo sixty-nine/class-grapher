@@ -4,7 +4,6 @@ namespace SixtyNine\ClassGrapher\Helper;
 
 class NamespaceTree
 {
-
     /** @var \SixtyNine\ClassGrapher\Helper\NamespaceTreeItem */
     protected $tree;
 
@@ -21,6 +20,7 @@ class NamespaceTree
     public function addNamespace($name)
     {
         $ns = new _Namespace($name);
+
         return $this->addParts($this->tree, $ns->getParts());
     }
 
@@ -48,11 +48,11 @@ class NamespaceTree
 //            echo "NEW CYCLE\n";
             if (count($this->tree->children) === 1) {
                 foreach ($this->tree->children as $parentName => $child) {
-//                    echo "PARENT: $parentName\n";
+                    //                    echo "PARENT: $parentName\n";
                     $newChildren = array();
                     $abort = false;
-                    foreach($child->children as $childName => $subchildren) {
-//                        echo "CHILD: $childName\n";
+                    foreach ($child->children as $childName => $subchildren) {
+                        //                        echo "CHILD: $childName\n";
                         if (!empty($subchildren->data)) {
                             break(3);
                         }
@@ -64,14 +64,13 @@ class NamespaceTree
                     }
                 }
             }
-
-        } while(count($this->tree->children) === 1);
-
+        } while (count($this->tree->children) === 1);
     }
 
     /**
      * @param \SixtyNine\ClassGrapher\Helper\NamespaceTreeItem $curPart
-     * @param array $parts
+     * @param array                                            $parts
+     *
      * @return mixed
      */
     protected function addParts($curPart, $parts = array())
@@ -79,16 +78,17 @@ class NamespaceTree
         if ($part = array_shift($parts)) {
             if ($part) {
                 $curPart = $curPart->addChild($part);
+
                 return $this->addParts($curPart, $parts);
             }
         }
+
         return $curPart;
     }
 
     protected function pruneEmptyNode($curNode)
     {
         foreach ($curNode->children as $name => $child) {
-
             $this->pruneEmptyNode($child);
 
             if (empty($child->data)) {
@@ -96,8 +96,6 @@ class NamespaceTree
                     unset($curNode->children[$name]);
                 }
             }
-
         }
     }
-
 }

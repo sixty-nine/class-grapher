@@ -2,8 +2,6 @@
 
 namespace SixtyNine\ClassGrapher\Helper;
 
-use SixtyNine\ClassGrapher\Model;
-
 class FileFinder
 {
     public function find($dirName, $pattern = '*.php', $excludeDirs = array())
@@ -14,8 +12,7 @@ class FileFinder
 
         $files = glob(sprintf('%s/%s', $dirName, $pattern));
 
-        foreach (glob($dirName . '/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir)
-        {
+        foreach (glob($dirName . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
             foreach ($excludeDirs as $excluded) {
                 if (basename($dir) === $excluded) {
                     continue(2);

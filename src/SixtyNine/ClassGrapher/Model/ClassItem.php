@@ -19,7 +19,7 @@ class ClassItem extends InterfaceItem
 
     public function addImplement($implement)
     {
-        if(!in_array($implement, $this->implements)) {
+        if (!in_array($implement, $this->implements)) {
             $this->implements[] = $implement;
         }
     }
@@ -29,7 +29,7 @@ class ClassItem extends InterfaceItem
         return $this->implements;
     }
 
-    function getType()
+    public function getType()
     {
         return ItemInterface::TYPE_CLASS;
     }

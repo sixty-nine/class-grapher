@@ -2,8 +2,8 @@
 
 namespace SixtyNine\ClassGrapher\Helper;
 
-class NamespaceHelper {
-
+class NamespaceHelper
+{
     public static function getBasename($namespace)
     {
         return basename(str_replace('\\', '/', $namespace));
@@ -15,6 +15,7 @@ class NamespaceHelper {
         if ($ns && $ns !== '.') {
             return str_replace('/', '\\', $ns);
         }
+
         return '';
     }
 
@@ -46,9 +47,11 @@ class NamespaceHelper {
      *
      * @see \SixtyNine\ClassGrapher\Tests\Helper\NamespaceHelperTest
      * @static
+     *
      * @param $namespace
      * @param $name
      * @param int $position
+     *
      * @return string
      */
     public static function insertNamespace($namespace, $name, $position = 0)
@@ -83,5 +86,5 @@ class NamespaceHelper {
         }
 
         return implode('\\', $parts);
-     }
+    }
 }

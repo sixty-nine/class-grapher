@@ -2,8 +2,6 @@
 
 namespace SixtyNine\ClassGrapher\Parser;
 
-use SixtyNine\ClassGrapher\Model;
-
 class Tokenizer
 {
     protected $fileName;
@@ -11,7 +9,7 @@ class Tokenizer
     protected $tokens;
 
     protected $curToken;
-    
+
     public function __construct($fileName)
     {
         if (!file_exists($fileName)) {
@@ -35,7 +33,6 @@ class Tokenizer
         }
 
         while (true) {
-
             if ($this->isEof()) {
                 break;
             }
@@ -55,17 +52,17 @@ class Tokenizer
     {
         $token = $this->peekToken();
         $this->forward();
+
         return $token;
     }
 
     public function expectToken($data, $optional = false, $compareType = false)
     {
         if (!$optional) {
-
             $token = $this->getToken();
 
             if (!$token) {
-                throw new TokenizerException("Not token found");
+                throw new TokenizerException('Not token found');
             }
 
             $testData = $compareType ? $token->type : trim($token->data);
@@ -73,9 +70,7 @@ class Tokenizer
             if ($testData !== $data) {
                 throw new TokenizerException("Expected '$data' got '$testData'");
             }
-
         } else {
-
             $token = $this->peekToken();
 
             $testData = $compareType ? $token->type : trim($token->data);
