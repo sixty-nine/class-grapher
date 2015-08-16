@@ -2,22 +2,20 @@
 
 namespace SixtyNine\ClassGrapher\Command;
 
-use SixtyNine\ClassGrapher\Model\ItemInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use SixtyNine\ClassGrapher\Model\ObjectTableBuilder;
-use SixtyNine\ClassGrapher\Helper\NamespaceHelper;
 use SixtyNine\AutoTest\Helper\Twig;
+use SixtyNine\ClassGrapher\Dump\DumpBuilder;
 
 class DumpObjectTableCommand extends Command
 {
     protected function configure()
     {
         $this
-            ->setName('dump')
+            ->setName('dump3')
             ->setDescription('Dump the object table')
             ->setHelp('Generate a list of classes and methods in text format')
             ->addArgument('dir', InputArgument::REQUIRED, '')
@@ -45,46 +43,8 @@ class DumpObjectTableCommand extends Command
         $noNs = $input->getOption('short') || $input->getOption('no-ns');
         $html = $input->getOption('html');
 
-        $otBuilder = new ObjectTableBuilder();
-        $table = $otBuilder->build($dir);
-
-        $data = array();
-
-        /** @var \SixtyNine\ClassGrapher\Model\ClassItem $definition */
-        foreach ($table as $className => $definition) {
-            $parents = $definition->getExtends();
-            $parents = array_merge($parents, $definition->getType() === ItemInterface::TYPE_CLASS ? $definition->getImplements() : array());
-
-            if ($noNs) {
-                $parents = array_map(function ($value) {
-                    return NamespaceHelper::getBasename($value);
-                }, $parents);
-            }
-
-            $parents = implode(', ', $parents);
-
-            $key = $sortNs ? $className : $definition->getBaseName();
-
-            $data[$key] = array(
-                'name' => !$noNs ? $className : $definition->getBaseName(),
-                'line' => $definition->getLine(),
-                'parents' => !$noParents ? $parents : null,
-            );
-
-            if (!$noMethods) {
-                $methods = $definition->getMethods();
-
-                if ($sortMethods) {
-                    ksort($methods);
-                }
-
-                $data[$key]['methods'] = $methods;
-            }
-        }
-
-        if ($sortClasses || $sortNs) {
-            ksort($data);
-        }
+        $dumpBuilder = new DumpBuilder($dir);
+        $data = $dumpBuilder->build($dir, $sortClasses, $sortNs, $sortMethods, $noParents, $noMethods, $noNs);
 
         $twig = Twig::getTwig(__DIR__ . '/../Resources/templates');
         $out = $twig->render(
