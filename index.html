@@ -36,8 +36,6 @@
 
 <p><a href="http://travis-ci.org/sixty-nine/ClassGrapher"><img src="https://secure.travis-ci.org/sixty-nine/ClassGrapher.png" alt="Build Status"></a> <a href="https://codeclimate.com/github/sixty-nine/ClassGrapher"><img src="https://codeclimate.com/github/sixty-nine/ClassGrapher/badges/gpa.svg" alt="Code Climate"></a> <a href="https://gemnasium.com/sixty-nine/ClassGrapher"><img src="https://gemnasium.com/sixty-nine/ClassGrapher.svg" alt="Dependency Status"></a></p>
 
-<p>This code is distributed under the MIT license.</p>
-
 <p>This application will generate a basic class diagram in GraphViz DOT format from
 the PHP files found in the path given as parameter.</p>
 
@@ -84,13 +82,31 @@ a class diagram of the class grapher code:</p>
 <pre><code>php devtools graph src/ | dot -T png | display
 </code></pre>
 
-<p>You can use the <code>--groups</code> option to group the classes by namespace and the <code>--noedges</code> option to not display relations between the classes.</p>
+<h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options</h2>
+
+<pre><code>Usage:
+  graph [options] [--] &lt;dir&gt;
+
+Arguments:
+  dir
+
+Options:
+      --groups          Group by namespace
+      --no-edges        Don't show the edges
+      --no-orphans      Don't show orphan nodes
+</code></pre>
 
 <h2>
 <a id="running-the-tests" class="anchor" href="#running-the-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running the tests</h2>
 
 <pre><code>phpunit -c tests/
 </code></pre>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>This code is distributed under the MIT license.</p>
         </section>
 
         <footer>
