@@ -2,6 +2,7 @@
 
 namespace SixtyNine\ClassGrapher\Command;
 
+use SixtyNine\ClassGrapher\Config\ConfigReader;
 use SixtyNine\ClassGrapher\Graph\GraphConfig;
 use SixtyNine\ClassGrapher\Graph\GraphFontConfig;
 use Symfony\Component\Console\Command\Command;
@@ -39,19 +40,8 @@ class BuildGraphCommand extends Command
         $table = $otBuilder->build($dir);
         $graph = $graphBuilder->build($table, $input->hasParameterOption('--no-orphans'));
 
-        $config = new GraphConfig();
-        $config
-            ->getInterfaceFont()
-            ->setColor('grey40')
-            ->setStyle(GraphFontConfig::FONT_ITALIC | GraphFontConfig::FONT_BOLD)
-        ;
-        $config
-            ->getBaseFont()
-            ->setStyle(GraphFontConfig::FONT_BOLD)
-            ->setColor('red')
-        ;
-        $config->getClassNode()->setStyle('rounded');
-        $config->getInterfaceNode()->setStyle('rounded,dotted');
+        $configReader = new ConfigReader();
+        $config = $configReader->read(__DIR__ . '/../Resources/config/config.yml');
 
         $config
             ->setShowGroups($input->hasParameterOption('--groups'))

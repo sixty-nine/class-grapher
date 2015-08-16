@@ -1,0 +1,34 @@
+graph:
+
+  nodes:
+
+    class:
+      shape: 'box'
+      style: 'rounded'
+      color: 'black'
+
+    interface:
+      shape: 'box'
+      style: 'rounded,dotted'
+      color: 'black'
+
+  fonts:
+
+    base:
+      font: 'AvantGarde-Book'
+      size: 8
+      style: 'bold'
+      color: 'red'
+
+    class:
+      font: 'AvantGarde-Book'
+      size: 8
+      style: ''
+      color: 'black'
+
+    interface:
+      font: 'AvantGarde-Book'
+      size: 8
+      style: ''
+      color: 'grey40'
+
