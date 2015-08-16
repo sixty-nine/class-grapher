@@ -79,11 +79,12 @@ class GraphBuilder
         }
 
         $nsTree->pruneAndMerge();
-        $this->buildGroups($nsTree->getTree());
 
         if ($removeOrphans) {
             $this->removeOrphans();
         }
+
+        $this->buildGroups($nsTree->getTree());
 
         return $this->graph;
     }
@@ -96,7 +97,10 @@ class GraphBuilder
             $cluster = 'cluster_' . $this->clusterCounter;
 
             foreach ($child->data as $className) {
-                $nodes[] = $this->nodes[md5($namespace . '\\' . $className)];
+                $hash = md5($namespace . '\\' . $className);
+                if (array_key_exists($hash, $this->nodes)) {
+                    $nodes[] = $this->nodes[$hash];
+                }
             }
             $this->graph->addGroup($cluster, str_replace('\\', '/', $name), $nodes, $parentCluster);
             ++$this->clusterCounter;
@@ -141,7 +145,21 @@ class GraphBuilder
 
             if ($isOrphan) {
                 $this->graph->removeNode($key);
+                $hash = $this->getNodeKey($key);
+                if ($hash) {
+                    unset($this->nodes[$hash]);
+                }
             }
         }
+    }
+
+    protected function getNodeKey($nodeName)
+    {
+        foreach ($this->nodes as $key => $value) {
+            if ($value === $nodeName) {
+                return $key;
+            }
+        }
+        return false;
     }
 }
