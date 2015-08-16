@@ -23,7 +23,8 @@ class BuildGraphCommand extends Command
             ->setHelp('Generate a class diagram in GraphViz format')
             ->addArgument('dir', InputArgument::REQUIRED, '')
             ->addOption('groups', null, InputOption::VALUE_NONE, 'Group by namespace')
-            ->addOption('noedges', null, InputOption::VALUE_NONE, 'Don\'t show the edges')
+            ->addOption('no-edges', null, InputOption::VALUE_NONE, 'Don\'t show the edges')
+            ->addOption('no-orphans', null, InputOption::VALUE_NONE, 'Don\'t show orphan nodes')
         ;
     }
 
@@ -36,7 +37,7 @@ class BuildGraphCommand extends Command
         $renderer = new GraphRenderer();
 
         $table = $otBuilder->build($dir);
-        $graph = $graphBuilder->build($table);
+        $graph = $graphBuilder->build($table, $input->hasParameterOption('--no-orphans'));
 
         $config = new GraphConfig();
         $config
@@ -52,7 +53,7 @@ class BuildGraphCommand extends Command
 
         $config
             ->setShowGroups($input->hasParameterOption('--groups'))
-            ->setShowEdges(!$input->hasParameterOption('--noedges'));
+            ->setShowEdges(!$input->hasParameterOption('--no-edges'));
 
         $out = $renderer->render($graph, $config);
 

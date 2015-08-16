@@ -84,6 +84,13 @@ class Graph
         }
     }
 
+    public function removeNode($id)
+    {
+        if (array_key_exists($id, $this->nodes)) {
+            unset($this->nodes[$id]);
+        }
+    }
+
     public function getNodes()
     {
         return $this->nodes;

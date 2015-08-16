@@ -43,7 +43,7 @@ class GraphBuilder
      *
      * @return \SixtyNine\ClassGrapher\Graph\Graph The inheritance graph
      */
-    public function build(ObjectTable $table)
+    public function build(ObjectTable $table, $removeOrphans = false)
     {
         $this->nodes = array();
         $this->counter = 0;
@@ -80,6 +80,10 @@ class GraphBuilder
 
         $nsTree->pruneAndMerge();
         $this->buildGroups($nsTree->getTree());
+
+        if ($removeOrphans) {
+            $this->removeOrphans();
+        }
 
         return $this->graph;
     }
@@ -119,6 +123,25 @@ class GraphBuilder
             $this->graph->addNode($id, $label, $interface);
 
             $this->counter += 1;
+        }
+    }
+
+    protected function removeOrphans()
+    {
+        foreach ($this->graph->getNodes() as $key => $data) {
+
+            $isOrphan = true;
+
+            foreach ($this->graph->getEdges() as $edge) {
+                if ($key === $edge[0] || $key === $edge[1]) {
+                    $isOrphan = false;
+                    break;
+                }
+            }
+
+            if ($isOrphan) {
+                $this->graph->removeNode($key);
+            }
         }
     }
 }
