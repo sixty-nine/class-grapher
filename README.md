@@ -1,9 +1,6 @@
-Class Grapher
-=============
+#Class Grapher
 
 [![Build Status](https://secure.travis-ci.org/sixty-nine/ClassGrapher.png)](http://travis-ci.org/sixty-nine/ClassGrapher) [![Code Climate](https://codeclimate.com/github/sixty-nine/ClassGrapher/badges/gpa.svg)](https://codeclimate.com/github/sixty-nine/ClassGrapher) [![Dependency Status](https://gemnasium.com/sixty-nine/ClassGrapher.svg)](https://gemnasium.com/sixty-nine/ClassGrapher)
-
-This code is distributed under the MIT license.
 
 This application will generate a basic class diagram in GraphViz DOT format from
 the PHP files found in the path given as parameter.
@@ -19,8 +16,7 @@ The grapher supports namespaced PHP 5.3. However, to reduce the width of the ren
 graph, the full namespaces are not shown in the diagram. This can easily be changed in
 the GraphVizBuilder::addNode method.
 
-Installation
-------------
+##Installation
 
 This code uses external components that will be installed with composer.
 
@@ -42,8 +38,7 @@ chmod +x composer.phar
 ./composer.phar install
 ```
 
-Usage
------
+##Usage
 
 Assumed you have ImageMagick installed you can run the following command to generate
 a class diagram of the class grapher code:
@@ -52,11 +47,25 @@ a class diagram of the class grapher code:
 php devtools graph src/ | dot -T png | display
 ```
 
-You can use the ```--groups``` option to group the classes by namespace and the ```--noedges``` option to not display relations between the classes.
+## Options
 
-Running the tests
------------------
+    Usage:
+      graph [options] [--] <dir>
+
+    Arguments:
+      dir
+
+    Options:
+          --groups          Group by namespace
+          --no-edges        Don't show the edges
+          --no-orphans      Don't show orphan nodes
+
+##Running the tests
 
 ```
 phpunit -c tests/
 ```
+
+## License
+
+This code is distributed under the MIT license.
