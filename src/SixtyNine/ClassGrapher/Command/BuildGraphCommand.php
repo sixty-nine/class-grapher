@@ -50,6 +50,8 @@ class BuildGraphCommand extends Command
             ->setStyle(GraphFontConfig::FONT_BOLD)
             ->setColor('red')
         ;
+        $config->getClassNode()->setStyle('rounded');
+        $config->getInterfaceNode()->setStyle('rounded,dotted');
 
         $config
             ->setShowGroups($input->hasParameterOption('--groups'))

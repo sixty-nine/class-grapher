@@ -12,6 +12,14 @@ class GraphConfig
     const DEFAULT_FONT = 'AvantGarde-Book';
     const DEFAULT_FONT_SIZE = 8;
 
+    const DEFAULT_NODE_SHAPE = 'box';
+    const DEFAULT_NODE_STYLE = '';
+    const DEFAULT_NODE_HEIGHT = 0.25;
+
+    /** @var GraphNodeConfig */
+    protected $classNode;
+    /** @var GraphNodeConfig */
+    protected $interfaceNode;
     /** @var GraphFontConfig */
     protected $baseFont;
     /** @var GraphFontConfig */
@@ -25,9 +33,23 @@ class GraphConfig
 
     public function __construct()
     {
+        $this->classNode = new GraphNodeConfig(self::DEFAULT_NODE_HEIGHT, self::DEFAULT_NODE_SHAPE, self::DEFAULT_NODE_STYLE);
+        $this->interfaceNode = new GraphNodeConfig(self::DEFAULT_NODE_HEIGHT, self::DEFAULT_NODE_SHAPE, self::DEFAULT_NODE_STYLE);
         $this->baseFont = new GraphFontConfig(self::DEFAULT_FONT, self::DEFAULT_FONT_SIZE);;
         $this->classFont = new GraphFontConfig(self::DEFAULT_FONT, self::DEFAULT_FONT_SIZE);;
         $this->interfaceFont = new GraphFontConfig(self::DEFAULT_FONT, self::DEFAULT_FONT_SIZE);;
+    }
+
+    /** @return GraphNodeConfig */
+    public function getClassNode()
+    {
+        return $this->classNode;
+    }
+
+    /** @return GraphNodeConfig */
+    public function getInterfaceNode()
+    {
+        return $this->interfaceNode;
     }
 
     /** @return GraphFontConfig */
@@ -37,36 +59,15 @@ class GraphConfig
     }
 
     /** @return GraphFontConfig */
-    public function setBaseFont(GraphFontConfig $font)
-    {
-        $this->baseFont = $font;
-        return $this;
-    }
-
-    /** @return GraphFontConfig */
     public function getClassFont()
     {
         return $this->classFont;
-    }
-
-    /** @param GraphFontConfig $font */
-    public function setClassFont(GraphFontConfig $font)
-    {
-        $this->classFont = $font;
-        return $this;
     }
 
     /** @return GraphFontConfig */
     public function getInterfaceFont()
     {
         return $this->interfaceFont;
-    }
-
-    /** @param GraphFontConfig $font */
-    public function setInterfaceFont(GraphFontConfig $font)
-    {
-        $this->interfaceFont = $font;
-        return $this;
     }
 
     /** @param boolean $showEdges */

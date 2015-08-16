@@ -10,9 +10,9 @@ digraph G {
         fontname = "{{config.classFont.font}}"
         fontsize = {{config.classFont.size}}
         fontcolor = {{config.classFont.color}}
-        shape = "box"
-        style = rounded
-        height = 0.25
+        shape = "{{config.classNode.shape}}"
+        style = "{{config.classNode.style}}"
+        height = {{config.classNode.height}}
     ]
 
     edge [
@@ -34,6 +34,9 @@ digraph G {
         fontname="{{config.interfaceFont.font}}",
         fontsize={{config.interfaceFont.size}},
         fontcolor={{config.interfaceFont.color}}
+        shape = "{{config.interfaceNode.shape}}"
+        style = "{{config.interfaceNode.style}}"
+        height = {{config.interfaceNode.height}}
     ]
 {% else %}
     {{id}} [

@@ -11,7 +11,7 @@ digraph G {
         fontsize = 8
         fontcolor = black
         shape = "box"
-        style = rounded
+        style = ""
         height = 0.25
     ]
 
@@ -26,6 +26,9 @@ digraph G {
         fontname="AvantGarde-Book",
         fontsize=8,
         fontcolor=grey40
+        shape = "box"
+        style = ""
+        height = 0.25
     ]
     node_1 [
         label = <<i><b>MyInterface2</b></i>>,
@@ -33,6 +36,9 @@ digraph G {
         fontname="AvantGarde-Book",
         fontsize=8,
         fontcolor=grey40
+        shape = "box"
+        style = ""
+        height = 0.25
     ]
     node_2 [
         label = <<i><b>MyInterface3</b></i>>,
@@ -40,6 +46,9 @@ digraph G {
         fontname="AvantGarde-Book",
         fontsize=8,
         fontcolor=grey40
+        shape = "box"
+        style = ""
+        height = 0.25
     ]
     node_3 [
         label = <MyClass1>,
