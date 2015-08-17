@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use SixtyNine\AutoTest\Helper\Twig;
+use SixtyNine\Common\Helper\Twig;
 use SixtyNine\ClassGrapher\Dump\DumpBuilder;
 
 class DumpObjectTableCommand extends Command
@@ -15,7 +15,7 @@ class DumpObjectTableCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('dump3')
+            ->setName('dump')
             ->setDescription('Dump the object table')
             ->setHelp('Generate a list of classes and methods in text format')
             ->addArgument('dir', InputArgument::REQUIRED, '')

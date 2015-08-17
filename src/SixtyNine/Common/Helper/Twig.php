@@ -1,6 +1,6 @@
 <?php
 
-namespace SixtyNine\AutoTest\Helper;
+namespace SixtyNine\Common\Helper;
 
 class Twig
 {

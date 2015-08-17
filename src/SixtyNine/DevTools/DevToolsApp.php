@@ -13,7 +13,6 @@ class DevToolsApp extends Application
         $commands = array(
             new \SixtyNine\ClassGrapher\Command\BuildGraphCommand(),
             new \SixtyNine\ClassGrapher\Command\DumpObjectTableCommand(),
-            new \SixtyNine\AutoTest\Command\AutoTestCommand(),
         );
 
         $this->addCommands($commands);

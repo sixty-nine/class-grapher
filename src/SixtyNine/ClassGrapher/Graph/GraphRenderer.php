@@ -20,7 +20,7 @@ class GraphRenderer implements GraphRendererInterface
     public function render(Graph $graph, GraphConfig $config)
     {
         //        die(var_dump($graph->getGroups()));
-        $twig = \SixtyNine\AutoTest\Helper\Twig::getTwig(__DIR__ . '/../Resources/templates');
+        $twig = \SixtyNine\Common\Helper\Twig::getTwig(__DIR__ . '/../Resources/templates');
 
         return $twig->render(
             'Graph.dot.twig',
