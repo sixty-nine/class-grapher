@@ -3,6 +3,7 @@
     	"symfony/console": "v2.7.3",
         "symfony/filesystem": "v2.7.3",
         "symfony/yaml": "v2.7.3",
+        "symfony/process": "v2.7.3",
         "twig/twig": "v1.20.0"
     },
 
