@@ -1,7 +1,7 @@
 {
     "name": "sixty-nine/class-grapher",
     "description": "Generate a basic class diagram in GraphViz DOT format from PHP files",
-    "homepage": "https://sixty-nine.github.io/ClassGrapher/",
+    "homepage": "https://sixty-nine.github.io/class-grapher/",
     "type": "project",
     "keywords": ["class", "graph", "uml", "php"],
     "license": "MIT",
