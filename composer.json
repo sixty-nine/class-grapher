@@ -1,4 +1,16 @@
 {
+    "name": "sixty-nine/class-grapher",
+    "description": "Generate a basic class diagram in GraphViz DOT format from PHP files",
+    "homepage": "https://sixty-nine.github.io/ClassGrapher/",
+    "type": "project",
+    "keywords": ["class", "graph", "uml", "php"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniele Barsotti",
+            "email": "sixtynine.db@gmail.com"
+        }
+    ],
     "require": {
     	"symfony/console": "v2.7.3",
         "symfony/filesystem": "v2.7.3",
